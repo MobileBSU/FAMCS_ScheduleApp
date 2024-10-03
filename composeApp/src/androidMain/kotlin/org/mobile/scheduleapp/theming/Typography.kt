@@ -106,7 +106,7 @@ val Typography = Typography(
     ),
     labelMedium = TextStyle(
         fontFamily = Inter,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.W400,
         fontSize = 14.sp
     ),
     bodySmall = TextStyle(

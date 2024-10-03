@@ -13,7 +13,7 @@ import androidx.core.view.WindowCompat
 
 
 val lightColorsScheme = lightColorScheme(
-    primary = HighlightDark,
+    primary = HighlightDarkest,
     onPrimary = NeutralLightWhite,
     background = NeutralLightLightest,
     onBackground = NeutralDarkDark,
@@ -59,6 +59,7 @@ fun ScheduleAppTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-        content = content
+        content = content,
+        shapes = Shapes
     )
 }
