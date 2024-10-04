@@ -7,4 +7,20 @@
     <string name="login">Login</string>
     <string name="not_a_memeber">Not a member?</string>
     <string name="register">Register now</string>
+    <string name="sign_up">Sign up</string>
+    <string name="create_account_to_get_started">Create account to get started\n</string>
+    <string name="name">Name</string>
+    <string name="name_example">Lucas Scott</string>
+    <string name="email_example">name@email.com</string>
+    <string name="create_password">Create password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="i_have_read">"I've read and agree with the "</string>
+    <string name="terms">TERMS</string>
+    <string name="terms_small">terms</string>
+    <string name="terms_and_privacy">Terms and Conditions</string>
+    <string name="and_the">" and the "</string>
+    <string name="PRIVACY">PRIVACY</string>
+    <string name="privacy">privacy</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="dot">.</string>
 </resources>
