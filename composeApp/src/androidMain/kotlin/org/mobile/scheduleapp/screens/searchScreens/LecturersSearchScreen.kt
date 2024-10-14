@@ -65,7 +65,7 @@ fun LecturersSearchScreen(modifier: Modifier = Modifier){
         CustomSearchBar(searchText = searchText, onTextChange = viewModel::onSearchTextChange)
         Spacer(modifier = Modifier.height(16.dp))
         if (searchText.isNotBlank()) {
-            GroupList(lecturers, searchText)
+            LecturerList(allLecturers, searchText)
         }
 
     }
