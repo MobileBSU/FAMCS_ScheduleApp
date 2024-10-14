@@ -7,4 +7,5 @@ object Dimens {
     val MainVerticalPadding = 40.dp
     val LargeSpaceBetween = 16.dp
     val ButtonSize = 48.dp
+    val SearchBarIconSize = 16.dp
 }

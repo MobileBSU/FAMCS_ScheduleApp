@@ -7,4 +7,8 @@
     <string name="login">Login</string>
     <string name="not_a_memeber">Not a member?</string>
     <string name="register">Register now</string>
+    <string name="search_icon">search icon</string>
+    <string name="search">Search</string>
+    <string name="all_groups">All groups</string>
+    <string name="all_lectures">All lecturers</string>
 </resources>
