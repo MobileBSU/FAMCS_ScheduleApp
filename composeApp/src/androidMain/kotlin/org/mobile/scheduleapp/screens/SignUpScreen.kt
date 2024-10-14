@@ -1,5 +1,6 @@
 package org.mobile.scheduleapp.screens
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -162,22 +163,9 @@ fun SignUpLayout(
                 onTermsAcceptedChange = onTermsAcceptedChange
             )
 
-            Button(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .height(Dimens.ButtonSize),
-                shape = MaterialTheme.shapes.medium,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = MaterialTheme.colorScheme.onPrimary
-                ),
-                onClick = onSignUpButtonClicked
-            ) {
-                Text(
-                    stringResource(id = R.string.sign_up),
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-            }
+            CustomButton(
+                onButtonClicked = onSignUpButtonClicked,
+                id = R.string.sign_up)
         }
     }
 
@@ -273,6 +261,30 @@ fun TermsAndCondRow(
                     }
             },
             modifier = Modifier.padding(Dimens.LargeSpaceBetween)
+        )
+    }
+}
+
+@Composable
+fun CustomButton(
+    modifier: Modifier = Modifier,
+    onButtonClicked: () -> Unit,
+    @StringRes id: Int
+) {
+    Button(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(Dimens.ButtonSize),
+        shape = MaterialTheme.shapes.medium,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary
+        ),
+        onClick = onButtonClicked
+    ) {
+        Text(
+            stringResource(id = id),
+            style = MaterialTheme.typography.bodyMedium,
         )
     }
 }

@@ -23,4 +23,7 @@
     <string name="privacy">privacy</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="dot">.</string>
+    <string name="enter_confimation_code">Enter confirmation code</string>
+    <string name="confirmation_code_digital">A 4-digit code was sent to</string>
+    <string name="continue_string">Continue</string>
 </resources>
