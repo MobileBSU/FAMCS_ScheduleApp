@@ -138,7 +138,7 @@ fun GroupItem(group: Group, searchText: String) {
             Dot()
             InfoText(text = group.major)
             Dot()
-            InfoText(text = "Курс ${group.course}")
+            InfoText(text = stringResource(R.string.course, group.course))
         }
         Divider(color = NeutralLightMedium)
     }

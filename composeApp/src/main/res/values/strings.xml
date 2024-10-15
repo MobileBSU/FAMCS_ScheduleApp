@@ -11,4 +11,9 @@
     <string name="search">Search</string>
     <string name="all_groups">All groups</string>
     <string name="all_lectures">All lecturers</string>
+    <string name="course">Курс %1$s</string>
+    <string name="my_schedule">My schedule</string>
+    <string name="schedule">Schedule</string>
+    <string name="lecture">Lecture</string>
+    <string name="profile">Profile</string>
 </resources>

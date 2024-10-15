@@ -35,6 +35,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.material3)
             implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
+            implementation("androidx.navigation:navigation-compose:2.8.2")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
