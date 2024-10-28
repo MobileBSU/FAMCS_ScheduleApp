@@ -11,4 +11,6 @@ object Dimens {
     val SmallVerticalPadding = 8.dp
     val CodeBoxSize = 50.dp
     val CodeInputTextFieldCorner = 12.dp
+    val SmallCornerShape = 10.dp
+    val DetailedPadding = 10.dp
 }
