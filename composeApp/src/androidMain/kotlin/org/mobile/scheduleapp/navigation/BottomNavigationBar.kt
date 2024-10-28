@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -24,6 +25,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.mobile.scheduleapp.R
+import org.mobile.scheduleapp.theming.Dimens
 import org.mobile.scheduleapp.theming.NeutralDarkDarkest
 import org.mobile.scheduleapp.theming.NeutralDarkLight
 
@@ -90,19 +92,21 @@ fun BottomNavigationBar(modifier: Modifier = Modifier) {
                                 },
                                 contentDescription = item.title,
                                 modifier = Modifier
-                                    .size(20.dp)
+                                    .size(Dimens.BottomNavIconSize)
                             )
                         },
                         label = {
                             if(index==selectedItemIndex) {
                                 Text(
                                     text = item.title,
-                                    color = NeutralDarkDarkest
+                                    color = NeutralDarkDarkest,
+                                    style = TextStyle()
                                 )
                             } else{
                                 Text(
                                     text = item.title,
-                                    color = NeutralDarkLight
+                                    color = NeutralDarkLight,
+                                    style = TextStyle()
                                 )
                             }
                         }
