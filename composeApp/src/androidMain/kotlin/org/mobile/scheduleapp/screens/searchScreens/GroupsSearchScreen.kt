@@ -36,6 +36,7 @@ import org.mobile.scheduleapp.R
 import org.mobile.scheduleapp.theming.NeutralDarkLight
 import org.mobile.scheduleapp.theming.NeutralLightMedium
 import org.mobile.scheduleapp.theming.NeutralLightWhite
+import org.mobile.scheduleapp.theming.ScheduleAppTheme
 
 
 //Test version of view model
@@ -98,57 +99,36 @@ fun GroupSearchScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
 
         if (searchText.isNotBlank()) {
-            GroupList(groups, searchText)
+            GroupList(
+                groups = groups
+            )
         }
     }
 }
 
 
 
-
-
 @Composable
-fun GroupList(groups: List<Group>, searchText: String) {
+fun GroupList(
+    modifier: Modifier = Modifier,
+    groups: List<Group>
+) {
     LazyColumn(modifier = Modifier.padding(8.dp)) {
         items(groups) { group ->
-            GroupItem(group = group, searchText = searchText)
+            GroupItem(
+                modifier = modifier.background(NeutralLightWhite),
+                group = group,
+            )
         }
     }
 }
 
-@Composable
-fun GroupItem(group: Group, searchText: String) {
-    Column(
-        modifier = Modifier
-            .background(NeutralLightWhite)
-            .fillMaxWidth()
-            .padding(8.dp)
-    ) {
-        Text(
-            text ="${group.groupNum} группа" ,
-            style = MaterialTheme.typography.labelLarge,
-            color = Color.Black,
-            modifier = Modifier.padding(8.dp)
-        )
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            InfoText(text = group.faculty)
-            Dot()
-            InfoText(text = group.major)
-            Dot()
-            InfoText(text = "Курс ${group.course}")
-        }
-        Divider(color = NeutralLightMedium)
-    }
-}
 
 
-
-
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun Test(){
-    GroupSearchScreen()
+    ScheduleAppTheme {
+
+    }
 }

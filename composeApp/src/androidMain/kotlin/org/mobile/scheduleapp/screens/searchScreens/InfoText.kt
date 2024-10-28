@@ -12,8 +12,7 @@ import org.mobile.scheduleapp.theming.NeutralDarkLight
 fun InfoText(text: String) {
     Text(
         text = text,
-        style = MaterialTheme.typography.labelSmall,
+        style = MaterialTheme.typography.bodySmall,
         color = NeutralDarkLight,
-        modifier = Modifier.padding(8.dp)
     )
 }

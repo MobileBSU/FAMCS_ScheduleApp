@@ -8,8 +8,10 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun Divider(color: Color) {
-    Canvas(modifier = Modifier.fillMaxWidth()) {
+fun Divider(
+    modifier: Modifier = Modifier,
+    color: Color) {
+    Canvas(modifier = modifier.fillMaxWidth()) {
         drawLine(
             color = color,
             start = Offset(0f, 0f),

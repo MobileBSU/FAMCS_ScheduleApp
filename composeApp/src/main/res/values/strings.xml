@@ -30,4 +30,12 @@
     <string name="enter_confimation_code">Enter confirmation code</string>
     <string name="confirmation_code_digital">A 4-digit code was sent to</string>
     <string name="continue_string">Continue</string>
+    <string name="group">Group</string>
+    <string name="lecture">Lecture\n</string>
+    <string name="details">Details\n</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="type">Type</string>
+    <string name="full">Full</string>
+    <string name="room">Auditorium</string>
 </resources>
