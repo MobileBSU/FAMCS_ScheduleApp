@@ -1,4 +1,4 @@
-package org.mobile.scheduleapp.screens.detailedScheduleScreen
+package org.mobile.scheduleapp.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Icon

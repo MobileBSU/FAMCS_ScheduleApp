@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import org.mobile.scheduleapp.R
+import org.mobile.scheduleapp.components.BackButton
 import org.mobile.scheduleapp.theming.Dimens
 
 @Composable

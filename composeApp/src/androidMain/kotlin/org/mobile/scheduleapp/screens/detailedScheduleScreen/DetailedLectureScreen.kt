@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import org.mobile.scheduleapp.components.DaySchedule
 import org.mobile.scheduleapp.theming.Dimens
 import org.mobile.scheduleapp.theming.ScheduleAppTheme
 

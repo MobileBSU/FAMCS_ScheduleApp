@@ -1,4 +1,4 @@
-package org.mobile.scheduleapp.screens
+package org.mobile.scheduleapp.screens.authScreens.login
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
@@ -23,7 +23,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,23 +40,32 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import org.mobile.scheduleapp.R
+import org.mobile.scheduleapp.navigation.AppRoute
 import org.mobile.scheduleapp.theming.Dimens
-import org.mobile.scheduleapp.theming.HighlightDarkest
 import org.mobile.scheduleapp.theming.NeutralLightDark
 import org.mobile.scheduleapp.theming.ScheduleAppTheme
 
 @Composable
-fun LoginScreen() {
-
+fun LoginScreen(
+    navController: NavController
+) {
 
     LoginLayout(
         uiState = LoginUiState(),
         onEmailChange = {},
         onPasswordChange = {},
         onForgotPasswordClicked = {},
-        onButtonLoginClicked = {},
-        onRegisterClicked = {}
+        onButtonLoginClicked = {
+            navController.navigate(AppRoute.Main.route) {
+                popUpTo(AppRoute.Auth.route) {inclusive = true}
+            }
+        },
+        onRegisterClicked = {
+            navController.navigate(AppRoute.SignUp.route)
+        }
     )
 }
 
@@ -266,7 +274,7 @@ fun PasswordEyeIcon(
 @Composable
 fun CustomTextFieldPreview(){
     ScheduleAppTheme {
-        LoginScreen()
+        LoginScreen(rememberNavController())
     }
 }
 

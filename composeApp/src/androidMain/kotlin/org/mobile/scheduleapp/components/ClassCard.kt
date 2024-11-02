@@ -1,4 +1,4 @@
-package org.mobile.scheduleapp.screens.detailedScheduleScreen
+package org.mobile.scheduleapp.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.mobile.scheduleapp.screens.detailedScheduleScreen.ClassItem
 import org.mobile.scheduleapp.theming.Dimens
 import org.mobile.scheduleapp.theming.NeutralDarkDarkest
 import org.mobile.scheduleapp.theming.NeutralDarkLightest

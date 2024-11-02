@@ -1,8 +1,7 @@
-package org.mobile.scheduleapp.screens
+package org.mobile.scheduleapp.screens.authScreens.signup
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,13 +28,20 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import org.mobile.scheduleapp.R
+import org.mobile.scheduleapp.components.CustomButton
+import org.mobile.scheduleapp.components.TermsAndCondRow
+import org.mobile.scheduleapp.navigation.AppRoute
+import org.mobile.scheduleapp.screens.authScreens.login.CustomTextField
 import org.mobile.scheduleapp.theming.Dimens
 import org.mobile.scheduleapp.theming.ScheduleAppTheme
 
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(
+    navController: NavController
+) {
     SignUpLayout(
         uiState = SignUpScreenUiState(),
         onNameChange = {},
@@ -43,7 +49,11 @@ fun SignUpScreen() {
         onPasswordChange = {},
         onPasswordConfirm = {},
         onTermsClicked = {},
-        onSignUpButtonClicked = {},
+        onSignUpButtonClicked = {
+            navController.navigate(AppRoute.MySchedule.route) {
+                popUpTo(AppRoute.Auth.route) { inclusive = true }
+            }
+        },
         onPrivacyClicked = {},
         onTermsAcceptedChange = {}
     )
@@ -175,132 +185,11 @@ fun SignUpLayout(
 @Composable
 fun SignUpLayoutPreview() {
     ScheduleAppTheme {
-        SignUpScreen()
+        SignUpScreen(rememberNavController())
     }
 }
 
 
-@Composable
-fun TermsAndCondRow(
-    modifier: Modifier = Modifier,
-    onTermsClicked: () -> Unit,
-    onPrivacyClicked: () -> Unit,
-    isToggleCheckBox: Boolean,
-    onTermsAcceptedChange: (Boolean) -> Unit
-) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Checkbox(
-            checked = isToggleCheckBox,
-            onCheckedChange = {
-                onTermsAcceptedChange(it)
-            }
-        )
-
-        val annotatedString = buildAnnotatedString {
-            append(stringResource(id = R.string.i_have_read))
-
-            pushStringAnnotation(
-                tag = stringResource(id = R.string.terms),
-                annotation = stringResource(id = R.string.terms_small)
-            )
-
-            withStyle(
-                style = SpanStyle(
-                    color = MaterialTheme.colorScheme.primary
-                )
-            ) {
-                append(stringResource(id = R.string.terms_and_privacy))
-            }
-            pop()
-
-            append(stringResource(id = R.string.and_the))
-
-            pushStringAnnotation(
-                tag = stringResource(id = R.string.PRIVACY),
-                annotation = stringResource(id = R.string.privacy)
-            )
-            withStyle(
-                style = SpanStyle(
-                    color = MaterialTheme.colorScheme.primary
-                )
-            ) {
-                append(stringResource(id = R.string.privacy_policy)
-                )
-            }
-            pop()
-
-            append(stringResource(id = R.string.dot))
-        }
-
-        val termsString = stringResource(id = R.string.terms)
-        val privacyString = stringResource(id = R.string.PRIVACY)
-
-        ClickableText(
-            text = annotatedString,
-            style = MaterialTheme.typography.bodyMedium,
-            onClick = { offset ->
-                annotatedString.getStringAnnotations(
-                    tag = termsString,
-                    start = offset,
-                    end = offset
-                )
-                    .firstOrNull()?.let {
-                        onTermsClicked()
-                    }
-
-                annotatedString.getStringAnnotations(
-                    tag = privacyString,
-                    start = offset,
-                    end = offset
-                )
-                    .firstOrNull()?.let {
-                        onPrivacyClicked()
-                    }
-            },
-            modifier = Modifier.padding(Dimens.LargeSpaceBetween)
-        )
-    }
-}
-
-@Composable
-fun CustomButton(
-    modifier: Modifier = Modifier,
-    onButtonClicked: () -> Unit,
-    @StringRes id: Int
-) {
-    Button(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(Dimens.ButtonSize),
-        shape = MaterialTheme.shapes.medium,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.onPrimary
-        ),
-        onClick = onButtonClicked
-    ) {
-        Text(
-            stringResource(id = id),
-            style = MaterialTheme.typography.bodyMedium,
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun TermsAndCondRowPreview() {
-    ScheduleAppTheme {
-        TermsAndCondRow(
-            onTermsClicked = { /*TODO*/ },
-            onPrivacyClicked = { /*TODO*/ },
-            isToggleCheckBox = false,
-            onTermsAcceptedChange = {}
-        )
-    }
-}
 data class SignUpScreenUiState(
     val name: String = "",
     val email: String = "",

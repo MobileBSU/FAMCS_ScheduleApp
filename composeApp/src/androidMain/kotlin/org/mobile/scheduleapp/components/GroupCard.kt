@@ -1,4 +1,4 @@
-package org.mobile.scheduleapp.screens.detailedClassScreen
+package org.mobile.scheduleapp.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
