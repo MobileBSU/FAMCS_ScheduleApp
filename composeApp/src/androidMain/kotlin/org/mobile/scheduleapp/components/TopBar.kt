@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.mobile.scheduleapp.R
+import org.mobile.scheduleapp.components.BackButton
 import org.mobile.scheduleapp.theming.Dimens
 import org.mobile.scheduleapp.theming.ScheduleAppTheme
 

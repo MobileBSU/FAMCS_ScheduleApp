@@ -1,4 +1,4 @@
-package org.mobile.scheduleapp.screens
+package org.mobile.scheduleapp.screens.authScreens.signup
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -16,8 +16,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,12 +25,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.mobile.scheduleapp.R
+import org.mobile.scheduleapp.components.CodeInputTextField
+import org.mobile.scheduleapp.components.CustomButton
 import org.mobile.scheduleapp.theming.Dimens
 import org.mobile.scheduleapp.theming.NeutralLightDark
 import org.mobile.scheduleapp.theming.ScheduleAppTheme
@@ -107,33 +106,6 @@ fun ConfirmationScreenLayout(
     }
 }
 
-@Composable
-fun CodeInputTextField(
-    modifier: Modifier = Modifier,
-    onCodeChange: (String) -> Unit,
-    value: String,
-) {
-    var isFocused by remember { mutableStateOf(false) }
-
-    OutlinedTextField(
-        value = value,
-        onValueChange = onCodeChange,
-        modifier = modifier
-            .size(Dimens.CodeBoxSize)
-            .onFocusChanged { focusState ->
-                isFocused = focusState.isFocused
-            }
-            .clip(
-                shape = RoundedCornerShape(Dimens.CodeInputTextFieldCorner)
-            )
-            .border(
-                width = 2.dp,
-                color = if (isFocused) MaterialTheme.colorScheme.primary else NeutralLightDark,
-                shape = RoundedCornerShape(Dimens.CodeInputTextFieldCorner)
-            ),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-    )
-}
 
 @Preview(showBackground = true)
 @Composable

@@ -1,6 +1,5 @@
-package org.mobile.scheduleapp.navigation
+package org.mobile.scheduleapp.navigation.bottomBar
 
-import android.media.Image
 import androidx.compose.ui.graphics.painter.Painter
 
 data class BottomNavigationItem(
