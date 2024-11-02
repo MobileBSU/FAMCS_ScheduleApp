@@ -37,6 +37,7 @@ kotlin {
             implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
             implementation("androidx.navigation:navigation-compose:2.8.2")
             implementation(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.koin.androidx.compose)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -47,6 +48,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.multiplatform.settings)
         }
     }
 }
