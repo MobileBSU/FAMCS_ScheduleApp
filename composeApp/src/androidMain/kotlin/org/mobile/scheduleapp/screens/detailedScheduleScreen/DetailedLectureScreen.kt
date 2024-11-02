@@ -1,14 +1,11 @@
 package org.mobile.scheduleapp.screens.detailedScheduleScreen
 
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import org.mobile.scheduleapp.theming.Dimens
+import org.mobile.scheduleapp.screens.ClassItem
+import org.mobile.scheduleapp.screens.MyScheduleScreenLayout
+import org.mobile.scheduleapp.screens.ScheduleItem
 import org.mobile.scheduleapp.theming.ScheduleAppTheme
 
 @Composable
@@ -31,50 +28,13 @@ fun DetailedScheduleScreen(modifier: Modifier = Modifier) {
         ))
     )
 
-    DetailedScheduleScreenLayout(
+    MyScheduleScreenLayout(
         onCardClicked = {},
         onBackIconClicked = {},
         label = "",
         scheduleItems = scheduleItems
     )
 }
-
-@Composable
-fun DetailedScheduleScreenLayout(
-    modifier: Modifier = Modifier,
-    onBackIconClicked: () -> Unit,
-    onCardClicked: () -> Unit,
-    label: String,
-    scheduleItems: List<ScheduleItem>
-) {
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = Dimens.LargeSpaceBetween)
-    ) {
-        item {
-            TopBar(
-                title = label,
-                onBackIconClicked = onBackIconClicked
-            )
-        }
-
-        item { Spacer(modifier = Modifier.height(Dimens.LargeSpaceBetween)) }
-
-        items(scheduleItems.size) { index ->
-            DaySchedule(
-                scheduleItems[index],
-                onCardClicked
-            )
-        }
-    }
-}
-
-
-
-data class ScheduleItem(val day: String, val classes: List<ClassItem>)
-data class ClassItem(val time: String, val type: String,val name : String, val room: String, val group: Int? = null, val date:String)
-
 
 
 
