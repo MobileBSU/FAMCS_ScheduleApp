@@ -1,4 +1,4 @@
-package org.mobile.scheduleapp.screens.detailedScheduleScreen
+package org.mobile.scheduleapp.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.mobile.scheduleapp.screens.detailedScheduleScreen.ScheduleItem
 
 @Composable
 fun DaySchedule(

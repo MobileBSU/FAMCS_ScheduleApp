@@ -10,6 +10,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import org.mobile.scheduleapp.components.DetailsClassInfo
+import org.mobile.scheduleapp.components.GroupCard
+import org.mobile.scheduleapp.components.LectureCard
 import org.mobile.scheduleapp.screens.detailedScheduleScreen.ClassItem
 import org.mobile.scheduleapp.screens.detailedScheduleScreen.TopBar
 import org.mobile.scheduleapp.screens.searchScreens.Group
