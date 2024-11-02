@@ -36,6 +36,7 @@ import org.mobile.scheduleapp.R
 import org.mobile.scheduleapp.theming.NeutralDarkLight
 import org.mobile.scheduleapp.theming.NeutralLightMedium
 import org.mobile.scheduleapp.theming.NeutralLightWhite
+import org.mobile.scheduleapp.theming.ScheduleAppTheme
 
 
 //Test version of view model
@@ -98,20 +99,26 @@ fun GroupSearchScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
 
         if (searchText.isNotBlank()) {
-            GroupList(groups, searchText)
+            GroupList(
+                groups = groups
+            )
         }
     }
 }
 
 
 
-
-
 @Composable
-fun GroupList(groups: List<Group>, searchText: String) {
+fun GroupList(
+    modifier: Modifier = Modifier,
+    groups: List<Group>
+) {
     LazyColumn(modifier = Modifier.padding(8.dp)) {
         items(groups) { group ->
-            GroupItem(group = group, searchText = searchText)
+            GroupItem(
+                modifier = modifier.background(NeutralLightWhite),
+                group = group,
+            )
         }
     }
 }
@@ -145,10 +152,10 @@ fun GroupItem(group: Group, searchText: String) {
 }
 
 
-
-
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun Test(){
-    GroupSearchScreen()
+    ScheduleAppTheme {
+
+    }
 }

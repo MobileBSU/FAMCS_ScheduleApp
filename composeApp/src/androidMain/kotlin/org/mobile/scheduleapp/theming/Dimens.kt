@@ -9,4 +9,9 @@ object Dimens {
     val ButtonSize = 48.dp
     val SearchBarIconSize = 16.dp
     val BottomNavIconSize = 20.dp
+    val SmallVerticalPadding = 8.dp
+    val CodeBoxSize = 50.dp
+    val CodeInputTextFieldCorner = 12.dp
+    val SmallCornerShape = 10.dp
+    val DetailedPadding = 10.dp
 }

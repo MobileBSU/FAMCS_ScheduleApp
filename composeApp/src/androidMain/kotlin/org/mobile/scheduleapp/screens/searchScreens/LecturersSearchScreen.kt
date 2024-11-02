@@ -32,7 +32,8 @@ import org.mobile.scheduleapp.theming.NeutralLightWhite
 data class Lecturer(
     val fio: String,
     val faculty: String,
-    val department: String
+    val department: String,
+    val imageUrl: String
 ){
     fun doesMatchSearchQuery(query: String): Boolean {
         val matchingCombinations = listOf(
@@ -44,8 +45,8 @@ data class Lecturer(
 
 //test version
 private val allLecturers = listOf(
-    Lecturer("Казанцева Ольга Геннадьевна","ФПМИ", "МСС"),
-    Lecturer("Казанцева Ольга Геннадьевна","ФПМИ", "МСС")
+    Lecturer("Казанцева Ольга Геннадьевна","ФПМИ", "МСС", ""),
+    Lecturer("Казанцева Ольга Геннадьевна","ФПМИ", "МСС", "")
 )
 
 @Composable

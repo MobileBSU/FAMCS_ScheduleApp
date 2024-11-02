@@ -1,14 +1,59 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# Мобильное приложение для управления расписанием занятий
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+## Цель проекта
+Разработка мобильного приложения для платформ Android и iOS, которое позволит студентам легко управлять своим расписанием занятий в университете. Приложение будет доступно для студентов Белорусского Государственного Университета и направлено на упрощение планирования учебного процесса.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Границы проекта
 
+### Область применения
+- Приложение предназначено исключительно для студентов Белорусского Государственного Университета.
+- Основной функционал – управление расписанием занятий.
+- Приложение **не будет включать** управление оценками или взаимодействие с преподавателями.
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…# FAMCS_ScheduleApp
+## Актуальность проекта и решаемые проблемы
+Существующие системы управления расписанием в университете не обеспечивают должного уровня удобства и функциональности. Наше приложение призвано решить следующие проблемы:
+- Отсутствие удобного интерфейса для планирования учебного процесса.
+- Недостаточная интеграция с актуальными потребностями студентов.
+- Отсутствие аналогичных решений в Беларуси.
+
+**Решение**: Проект улучшит эффективность планирования времени для студентов и упростит взаимодействие с учебным процессом.
+
+## Роль пользователя системы
+
+### Описание пользователей:
+1. **Студент, участник актива**
+   - Студент факультета, активно участвующий в организации факультетских мероприятий.
+  
+2. **Администрация/Преподаватель**
+   - Член преподавательского состава или административный работник, занимающийся организацией учебного процесса и преподаванием.
+
+## Инструменты и технологии для реализации проекта
+
+### Платформа Android:
+- **Языки программирования**: Kotlin, Java
+- **Фреймворки и библиотеки**:
+  - Android SDK
+  - Jetpack Compose + Material Design
+  - Retrofit (для сетевых запросов)
+  - Coroutines + Flow (для работы с асинхронными потоками данных)
+  - Dagger/Hilt (для внедрения зависимостей)
+  - Coil (для работы с изображениями)
+  - MVVM / MVI (архитектурные паттерны)
+  - JUnit + Mockito (тестирование)
+ ### Платформа IOS
+ - **Язык программирования**: Swift
+ - **Фреймворки и библиотеки**:
+ - SwiftUI essentials Views Navigation and modal presentation Passing data State management Persistence and concurrency UIKit essentials Collection views and navigation Adding, deleting, and filtering reminders Custom views and animation System frameworks
+
+### Инструменты планирования:
+- **GitHub** для управления проектом и версионирования.
+
+### Средства разработки:
+- **Xcode** (для iOS)
+- **Android Studio** (для Android)
+
+### Дизайн:
+- **Figma**: [Ссылка на макет приложения](https://www.figma.com/design/96rNac0zYX7WNxXM3Bc9FT/ScheduleApp?node-id=0-1&m=dev)
+
+## Пример архитектуры базы данных
+![База данных](https://github.com/user-attachments/assets/4e5e3511-b717-4efd-8399-b76b5607b987)
