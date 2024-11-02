@@ -123,6 +123,33 @@ fun GroupList(
     }
 }
 
+@Composable
+fun GroupItem(group: Group, searchText: String) {
+    Column(
+        modifier = Modifier
+            .background(NeutralLightWhite)
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
+        Text(
+            text ="${group.groupNum} группа" ,
+            style = MaterialTheme.typography.labelLarge,
+            color = Color.Black,
+            modifier = Modifier.padding(8.dp)
+        )
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            InfoText(text = group.faculty)
+            Dot()
+            InfoText(text = group.major)
+            Dot()
+            InfoText(text = stringResource(R.string.course, group.course))
+        }
+        Divider(color = NeutralLightMedium)
+    }
+}
 
 
 @Preview(showBackground = true)
