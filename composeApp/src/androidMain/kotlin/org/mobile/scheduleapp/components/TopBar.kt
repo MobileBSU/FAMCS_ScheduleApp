@@ -9,32 +9,49 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import org.mobile.scheduleapp.R
 import org.mobile.scheduleapp.components.BackButton
 import org.mobile.scheduleapp.theming.Dimens
+import org.mobile.scheduleapp.theming.ScheduleAppTheme
 
 @Composable
 fun TopBar(
     modifier: Modifier = Modifier,
     title: String,
-    onBackIconClicked: () -> Unit
+    onBackIconClicked: () -> Unit,
+    isBackIconHidden: Boolean = true
 ) {
     Box(
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = Dimens.LargeSpaceBetween)
     ) {
-        BackButton(
-            modifier = modifier.align(Alignment.CenterStart),
-            icon = painterResource(R.drawable.left_button),
-            onNavigateClick = onBackIconClicked
-        )
+        if (!isBackIconHidden) {
+            BackButton(
+                modifier = modifier.align(Alignment.CenterStart),
+                icon = painterResource(R.drawable.left_button),
+                onNavigateClick = onBackIconClicked
+            )
+        }
 
         Text(
             modifier = modifier
                 .align(Alignment.Center),
             text = title,
             style = MaterialTheme.typography.displaySmall
+        )
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+private fun prev() {
+    ScheduleAppTheme {
+        TopBar(
+            title = "шг",
+            onBackIconClicked = {},
         )
     }
 }

@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import org.mobile.scheduleapp.components.DetailsClassInfo
 import org.mobile.scheduleapp.components.GroupCard
 import org.mobile.scheduleapp.components.LectureCard
-import org.mobile.scheduleapp.screens.detailedScheduleScreen.ClassItem
+import org.mobile.scheduleapp.screens.ClassItem
 import org.mobile.scheduleapp.screens.detailedScheduleScreen.TopBar
 import org.mobile.scheduleapp.screens.searchScreens.Group
 import org.mobile.scheduleapp.screens.searchScreens.Lecturer
