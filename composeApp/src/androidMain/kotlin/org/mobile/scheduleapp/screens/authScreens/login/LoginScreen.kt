@@ -192,11 +192,15 @@ fun CustomTextField(
     onValueChange: (String) -> Unit,
     keyboardType: KeyboardType = KeyboardType.Text,
     isPasswordField: Boolean = false,
+    isEditField: Boolean = false,
     isSingleLine: Boolean = false,
-    @StringRes hint: Int
+    @StringRes hint: Int,
+    isHintHidden: Boolean = false,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    readOnly: Boolean = false
 ) {
 
-    var isPasswrodVisible by remember {
+    var isPasswordVisible by remember {
         mutableStateOf(false)
     }
     TextField(
@@ -209,11 +213,15 @@ fun CustomTextField(
                 shape = MaterialTheme.shapes.medium
             ),
         value = value,
+        readOnly = readOnly,
         onValueChange = onValueChange,
         placeholder = {
-             Text(
-                 text = stringResource(id = hint),
-                 style = MaterialTheme.typography.labelMedium)
+            if(!isHintHidden) {
+                Text(
+                    text = stringResource(id = hint),
+                    style = MaterialTheme.typography.labelMedium
+                )
+            }
         },
         textStyle = MaterialTheme.typography.labelMedium,
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -227,7 +235,7 @@ fun CustomTextField(
             focusedIndicatorColor = Color.Transparent,
         ),
         visualTransformation = if(isPasswordField){
-            if(isPasswrodVisible){
+            if(isPasswordVisible){
                 VisualTransformation.None
             } else {
                 PasswordVisualTransformation()
@@ -237,17 +245,20 @@ fun CustomTextField(
         },
         trailingIcon = if (isPasswordField) {
             {
-                PasswordEyeIcon(isPasswordHidden = isPasswrodVisible) {
-                    isPasswrodVisible = !isPasswrodVisible
+                PasswordEyeIcon(isPasswordHidden = isPasswordVisible) {
+                    isPasswordVisible = !isPasswordVisible
                 }
             }
-        }else {
+
+        } else if(isEditField) {
+            trailingIcon
+        }
+        else {
             null
         }
     )
 
 }
-
 @Composable
 fun PasswordEyeIcon(
     modifier: Modifier = Modifier,
