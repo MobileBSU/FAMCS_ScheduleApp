@@ -42,4 +42,8 @@
     <string name="type">Type</string>
     <string name="full">Full</string>
     <string name="room">Auditorium</string>
+    <string name="setting">Settings</string>
+    <string name="surname">Surname</string>
+    <string name="save">Save\n</string>
+    <string name="empty">" "</string>
 </resources>
