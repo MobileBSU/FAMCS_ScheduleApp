@@ -51,7 +51,7 @@ fun SignUpScreen(
         onNameChange = viewModel::updateUsername,
         onEmailChange = viewModel::updateEmail,
         onPasswordChange = viewModel::updatePassword,
-        onPasswordConfirm = {},
+        onPasswordConfirm = viewModel::updateConfirmedPassword,
         onTermsClicked = {},
         onSignUpButtonClicked = viewModel::signUp,
 //        {
@@ -169,7 +169,7 @@ fun SignUpLayout(
                     Spacer(modifier = modifier.height(Dimens.LargeSpaceBetween))
 
                     CustomTextField(
-                        value = uiState.password,
+                        value = uiState.confirmedPassword,
                         onValueChange = onPasswordConfirm,
                         hint = R.string.confirm_password,
                         isPasswordField = true
