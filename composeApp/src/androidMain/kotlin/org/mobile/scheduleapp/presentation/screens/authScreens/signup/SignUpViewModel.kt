@@ -1,5 +1,6 @@
 package org.mobile.scheduleapp.presentation.screens.authScreens.signup
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -22,34 +23,48 @@ class SignUpViewModel(
         )
 
     override fun signUp() {
-        viewModelScope.launch {
-            updateState { copy(isAuthenticating = true) }
+        if (isPasswordSame()) {
+            viewModelScope.launch {
+                updateState { copy(isAuthenticating = true) }
 
-            val authResultData = signUpUseCase(
-                uiState.value.email,
-                uiState.value.username,
-                uiState.value.password
-            )
+                val authResultData = signUpUseCase(
+                    uiState.value.email,
+                    uiState.value.username,
+                    uiState.value.password
+                )
 
-            updateState {
-                when(authResultData) {
-                    is Result.Error -> {
-                        copy(
-                            isAuthenticating = false,
-                            authErrorMessage = authResultData.message)
+                updateState {
+                    when (authResultData) {
+                        is Result.Error -> {
+                            copy(
+                                isAuthenticating = false,
+                                authErrorMessage = authResultData.message
+                            )
+                        }
+
+                        is Result.Success -> {
+                            copy(
+                                isAuthenticating = false,
+                                authenticationSucceed = true
+                            )
+                        }
                     }
-                    is Result.Success -> {
-                        copy(
-                            isAuthenticating = false,
-                            authenticationSucceed = true
-                        )
-                    }
-                } }
+                }
+            }
         }
     }
 
     override fun updateUsername(input: String) {
         updateState { copy(username = input) }
+    }
+
+    private fun isPasswordSame(): Boolean {
+        if (uiState.value.password == uiState.value.confirmedPassword) {
+            return true
+        }
+        else {
+            return false
+        }
     }
 
     override fun updateEmail(input: String) {
@@ -58,6 +73,9 @@ class SignUpViewModel(
 
     override fun updatePassword(input: String) {
         updateState { copy(password = input) }
+    }
+    override fun updateConfirmedPassword(input: String) {
+        updateState { copy(confirmedPassword = input) }
     }
 
     override fun updateIsTermsAccepted(input: Boolean) {
@@ -69,6 +87,7 @@ data class SignUpState(
     val username: String = "",
     val email: String = "",
     val password: String = "",
+    val confirmedPassword: String = "",
     val isTermsAccepted: Boolean = false,
     var isAuthenticating: Boolean = false,
     var authErrorMessage: String? = null,

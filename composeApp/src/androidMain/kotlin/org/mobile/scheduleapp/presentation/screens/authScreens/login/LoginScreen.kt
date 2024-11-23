@@ -28,6 +28,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -58,10 +59,14 @@ fun LoginScreen(
     navController: NavController
 ) {
     val viewModel: LoginViewModel = koinViewModel()
+    val state = viewModel.stateFlow.collectAsState().value
+
 
     LoginLayout(
-        uiState = viewModel.state,
-        onEmailChange = viewModel::updateEmail,
+        uiState = state,
+        onEmailChange = { input ->
+            viewModel.updateEmail(input)
+        },
         onPasswordChange = viewModel::updateEmail,
         onForgotPasswordClicked = {},
         onButtonLoginClicked = viewModel::signIn,
@@ -124,8 +129,10 @@ fun LoginLayout(
                     verticalArrangement = Arrangement.spacedBy(Dimens.LargeSpaceBetween)
                 ) {
                     CustomTextField(
-                        value = uiState.email,
-                        onValueChange = onEmailChange,
+                        value = uiState.email ,
+                        onValueChange = {
+                            onEmailChange(it)
+                        },
                         hint = R.string.email_address
                     )
                     CustomTextField(
@@ -228,6 +235,7 @@ fun CustomTextField(
     var isPasswrodVisible by remember {
         mutableStateOf(false)
     }
+
     TextField(
         modifier = modifier
             .fillMaxWidth()
@@ -238,7 +246,9 @@ fun CustomTextField(
                 shape = MaterialTheme.shapes.medium
             ),
         value = value,
-        onValueChange = onValueChange,
+        onValueChange = {
+            onValueChange(it)
+        },
         placeholder = {
              Text(
                  text = stringResource(id = hint),

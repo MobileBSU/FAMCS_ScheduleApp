@@ -6,4 +6,5 @@ interface SignUpController {
     fun updateEmail(input: String)
     fun updatePassword(input: String)
     fun updateIsTermsAccepted(input: Boolean)
+    fun updateConfirmedPassword(input: String)
 }

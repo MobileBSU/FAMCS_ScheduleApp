@@ -1,5 +1,6 @@
 package org.mobile.scheduleapp.presentation.screens.authScreens.signup
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
@@ -41,10 +43,11 @@ fun SignUpScreen(
 ) {
 
     val viewModel: SignUpViewModel = koinViewModel()
+    val state = viewModel.stateFlow.collectAsState().value
 
 
     SignUpLayout(
-        uiState = viewModel.state,
+        uiState = state,
         onNameChange = viewModel::updateUsername,
         onEmailChange = viewModel::updateEmail,
         onPasswordChange = viewModel::updatePassword,
@@ -124,7 +127,9 @@ fun SignUpLayout(
 
                     CustomTextField(
                         value = uiState.username,
-                        onValueChange = onNameChange,
+                        onValueChange = {
+                            onNameChange(it)
+                                        },
                         hint = R.string.name_example
                     )
                 }
@@ -211,11 +216,3 @@ fun SignUpLayoutPreview() {
         SignUpScreen(rememberNavController())
     }
 }
-
-
-data class SignUpScreenUiState(
-    val name: String = "",
-    val email: String = "",
-    val password: String = "",
-    val isTermsAccepted: Boolean = false
-)

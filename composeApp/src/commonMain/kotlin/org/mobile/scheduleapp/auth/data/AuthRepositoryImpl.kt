@@ -55,6 +55,7 @@ internal class AuthRepositoryImpl(
             } catch (e: Exception) {
                 Result.Error(
                     message = "Oops, we couldn`t send your request"
+
                 )
             }
         }

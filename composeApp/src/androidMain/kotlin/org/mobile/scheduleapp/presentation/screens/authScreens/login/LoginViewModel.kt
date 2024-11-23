@@ -1,5 +1,6 @@
 package org.mobile.scheduleapp.presentation.screens.authScreens.login
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -47,17 +48,14 @@ class LoginViewModel(
     }
 
     override fun updateEmail(input: String) {
+        Log.d("CustomTextField", "onValueChange2 called with: $input ")
+
         updateState { copy(email = input) }
     }
 
     override fun updatePassword(input: String) {
         updateState { copy(password = input) }
     }
-}
-
-interface LoginController {
-    fun updateEmail(input: String)
-    fun updatePassword(input: String)
 }
 
 
