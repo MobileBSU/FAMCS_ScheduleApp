@@ -70,16 +70,21 @@ fun LoginScreen(
         onPasswordChange = viewModel::updateEmail,
         onForgotPasswordClicked = {},
         onButtonLoginClicked = viewModel::signIn,
-//        {
-//            navController.navigate(AppRoute.Main.route) {
-//                popUpTo(AppRoute.Auth.route) {inclusive = true}
-//            }
-//        },
         onRegisterClicked = {
-            navController.navigate(AppRoute.SignUp.route)
+            navController.navigate(AppRoute.SignUp.route) {
+                popUpTo(AppRoute.Login.route) {inclusive = true}
+            }
         },
         onNavigateToHome = {}
     )
+
+    LaunchedEffect(key1 = state.authenticationSucceed){
+        if (state.authenticationSucceed) {
+            navController.navigate(AppRoute.MySchedule.route) {
+                popUpTo(AppRoute.Auth.route) { inclusive = true }
+            }
+        }
+    }
 }
 
 @Composable

@@ -1,6 +1,7 @@
 package org.mobile.scheduleapp.presentation.view.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.compose.NavHost
@@ -10,19 +11,21 @@ import org.koin.androidx.compose.koinViewModel
 import org.mobile.scheduleapp.presentation.view.navigation.graphs.authNavGraph
 import org.mobile.scheduleapp.presentation.view.navigation.graphs.mainNavGraph
 import org.mobile.scheduleapp.presentation.screens.authScreens.AuthViewModel
+import org.mobile.scheduleapp.presentation.view.navigation.graphs.splashNavGraph
 
 @Composable
-fun AppNavigation() {
-    val viewModel: AuthViewModel = koinViewModel()
+fun AppNavigation(
+    token: String?
+) {
     val navController = rememberNavController()
-    val isUserLoggedIn by viewModel.isUserLoggedIn.collectAsState()
 
 
     NavHost(
         navController = navController,
-        startDestination = if (isUserLoggedIn) AppRoute.Main.route else AppRoute.Auth.route
+        startDestination = AppRoute.Splash.route
     ) {
-        authNavGraph(navController, viewModel)
+        splashNavGraph(navController, token)
+        authNavGraph(navController)
         mainNavGraph(navController)
     }
 

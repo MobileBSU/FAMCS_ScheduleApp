@@ -1,17 +1,21 @@
 package org.mobile.scheduleapp.presentation.screens.authScreens.login
 
 import android.util.Log
+import androidx.datastore.core.DataStore
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.mobile.scheduleapp.auth.domain.usecase.SignInUseCase
+import org.mobile.scheduleapp.common.datastore.UserSettings
+import org.mobile.scheduleapp.common.datastore.toUserSettings
 import org.mobile.scheduleapp.common.util.Result
 import org.mobile.scheduleapp.presentation.utils.StatefulViewModel
 
 class LoginViewModel(
-    private val signInUseCase: SignInUseCase
+    private val signInUseCase: SignInUseCase,
+    private val dataStore: DataStore<UserSettings>
 ) :
     StatefulViewModel<LoginUiState>(LoginUiState()), LoginController {
     val uiState : StateFlow<LoginUiState>
@@ -38,6 +42,11 @@ class LoginViewModel(
                             authErrorMessage = authResultData.message)
                     }
                     is Result.Success -> {
+                        viewModelScope.launch {
+                            dataStore.updateData {
+                                authResultData.data!!.toUserSettings()
+                            }
+                        }
                         copy(
                             isAuthenticating = false,
                             authenticationSucceed = true
@@ -48,8 +57,6 @@ class LoginViewModel(
     }
 
     override fun updateEmail(input: String) {
-        Log.d("CustomTextField", "onValueChange2 called with: $input ")
-
         updateState { copy(email = input) }
     }
 

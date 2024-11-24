@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
+    kotlin("plugin.serialization") version "2.0.21"
 
 }
 
@@ -40,7 +40,7 @@ kotlin {
             implementation(libs.androidx.navigation.compose)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.koin.androidx.compose)
-
+            implementation("androidx.datastore:datastore-core:1.0.0-alpha08")
             implementation(libs.ktor.client.android)
             api(libs.koin.android)
         }
@@ -57,8 +57,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
-
+            api(libs.ktor.serialization.kotlinx.json)
             api(libs.koin.core)
         }
 

@@ -3,6 +3,7 @@ package org.mobile.scheduleapp.presentation.view.navigation
 sealed class AppRoute(val route: String) {
     object Auth : AppRoute("auth")
     object Main : AppRoute("main")
+    object Splash: AppRoute("splash")
 
     object Login : AppRoute("auth/login")
     object SignUp : AppRoute("auth/signup")

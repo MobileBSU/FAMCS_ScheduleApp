@@ -42,4 +42,6 @@
     <string name="type">Type</string>
     <string name="full">Full</string>
     <string name="room">Auditorium</string>
+    <string name="have_account">Have already account?</string>
+    <string name="sign_in">Sign in</string>
 </resources>

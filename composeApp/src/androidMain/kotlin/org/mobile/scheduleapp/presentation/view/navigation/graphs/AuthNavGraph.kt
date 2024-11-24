@@ -9,7 +9,7 @@ import org.mobile.scheduleapp.presentation.screens.authScreens.AuthViewModel
 import org.mobile.scheduleapp.presentation.screens.authScreens.login.LoginScreen
 import org.mobile.scheduleapp.presentation.screens.authScreens.signup.SignUpScreen
 
-fun NavGraphBuilder.authNavGraph(navController: NavController, viewModel: AuthViewModel) {
+fun NavGraphBuilder.authNavGraph(navController: NavController) {
     navigation(startDestination = AppRoute.Login.route, route = AppRoute.Auth.route) {
         composable(AppRoute.Login.route) {
             LoginScreen(

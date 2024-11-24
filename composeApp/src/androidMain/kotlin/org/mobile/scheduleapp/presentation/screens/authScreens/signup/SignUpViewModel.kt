@@ -1,6 +1,7 @@
 package org.mobile.scheduleapp.presentation.screens.authScreens.signup
 
 import android.util.Log
+import androidx.datastore.core.DataStore
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -8,11 +9,14 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.mobile.scheduleapp.auth.domain.usecase.SignUpUseCase
+import org.mobile.scheduleapp.common.datastore.UserSettings
+import org.mobile.scheduleapp.common.datastore.toUserSettings
 import org.mobile.scheduleapp.common.util.Result
 import org.mobile.scheduleapp.presentation.utils.StatefulViewModel
 
 class SignUpViewModel(
-    private val signUpUseCase: SignUpUseCase
+    private val signUpUseCase: SignUpUseCase,
+    private val dataStore: DataStore<UserSettings>
 ): StatefulViewModel<SignUpState>(SignUpState()), SignUpController {
 
     val uiState: StateFlow<SignUpState>
@@ -43,6 +47,11 @@ class SignUpViewModel(
                         }
 
                         is Result.Success -> {
+                            viewModelScope.launch {
+                                dataStore.updateData {
+                                    authResultData.data!!.toUserSettings()
+                                }
+                            }
                             copy(
                                 isAuthenticating = false,
                                 authenticationSucceed = true

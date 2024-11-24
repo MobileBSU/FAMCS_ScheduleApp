@@ -3,13 +3,17 @@ package org.mobile.scheduleapp.presentation.screens.authScreens.signup
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -26,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.compose.koinViewModel
@@ -53,18 +58,26 @@ fun SignUpScreen(
         onPasswordChange = viewModel::updatePassword,
         onPasswordConfirm = viewModel::updateConfirmedPassword,
         onTermsClicked = {},
-        onSignUpButtonClicked = viewModel::signUp,
-//        {
-//
-//            navController.navigate(AppRoute.MySchedule.route) {
-//                popUpTo(AppRoute.Auth.route) { inclusive = true }
-//            }
-//        },
+        onSignUpButtonClicked = {
+            viewModel.signUp()
+        },
         onPrivacyClicked = {},
         onTermsAcceptedChange = viewModel::updateIsTermsAccepted,
         onNavigateToHome = {},
-        onNavigateToLogin = {}
+        onNavigateToLogin = {
+            navController.navigate(AppRoute.Login.route) {
+                popUpTo(AppRoute.SignUp.route) {inclusive = true}
+            }
+        }
     )
+
+    LaunchedEffect(key1 = state.authenticationSucceed) {
+        if (state.authenticationSucceed) {
+            navController.navigate(AppRoute.MySchedule.route) {
+                popUpTo(AppRoute.Auth.route) { inclusive = true }
+            }
+        }
+    }
 }
 
 @Composable
@@ -186,6 +199,27 @@ fun SignUpLayout(
                 CustomButton(
                     onButtonClicked = onSignUpButtonClicked,
                     id = R.string.sign_up)
+
+                Row(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(vertical = Dimens.LargeSpaceBetween),
+                    horizontalArrangement = Arrangement.Start
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.have_account),
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                    Spacer(modifier = modifier.width(5.dp))
+                    Text(
+                        text = stringResource(id = R.string.sign_in),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = modifier
+                            .clickable { onNavigateToLogin() }
+                    )
+
+                }
             }
         }
 
@@ -213,6 +247,17 @@ fun SignUpLayout(
 @Composable
 fun SignUpLayoutPreview() {
     ScheduleAppTheme {
-        SignUpScreen(rememberNavController())
+        SignUpLayout( uiState = SignUpState(),
+            onNameChange = TODO(),
+            onEmailChange = TODO(),
+            onPasswordChange = TODO(),
+            onPasswordConfirm = TODO(),
+            onTermsAcceptedChange = TODO(),
+            onTermsClicked = TODO(),
+            onPrivacyClicked = TODO(),
+            onNavigateToLogin = TODO(),
+            onSignUpButtonClicked = TODO(),
+            onNavigateToHome = TODO()
+        )
     }
 }
