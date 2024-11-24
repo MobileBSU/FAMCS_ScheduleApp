@@ -32,11 +32,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import org.mobile.scheduleapp.R
-import org.mobile.scheduleapp.components.CustomButton
-import org.mobile.scheduleapp.screens.authScreens.login.CustomTextField
+import org.mobile.scheduleapp.presentation.screens.authScreens.login.CustomTextField
+import org.mobile.scheduleapp.presentation.view.components.CustomButton
+import org.mobile.scheduleapp.presentation.view.theming.Dimens
+import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
 import org.mobile.scheduleapp.screens.detailedScheduleScreen.TopBar
-import org.mobile.scheduleapp.theming.Dimens
-import org.mobile.scheduleapp.theming.ScheduleAppTheme
 
 @Composable
 fun EditProfileScreen(navController: NavController) {
@@ -201,7 +201,6 @@ fun EditInputTextField(
             value = value,
             onValueChange = onValueChanged,
             hint = R.string.name,
-            isHintHidden = true
         )
     }
 }
@@ -219,12 +218,7 @@ fun DropdownSelection(label: String, options: List<String>) {
         CustomTextField(
             value = selectedOption,
             onValueChange = {},
-            hint =R.string.empty,
-            isEditField = true,
-            trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-            },
-            readOnly = true
+            hint =R.string.empty
         )
         ExposedDropdownMenu(
             expanded = expanded,
@@ -248,7 +242,7 @@ data class ProfileUi(val name: String, val surname: String?, val email: String)
 @Preview
 @Composable
 private fun Preview() {
-    ScheduleAppTheme {
+    ScheduleAppTheme{
         EditProfileScreenLayout(
             onSetNewPhotoClicked = {}
         )

@@ -28,10 +28,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import org.mobile.scheduleapp.R
+import org.mobile.scheduleapp.presentation.view.theming.Dimens
+import org.mobile.scheduleapp.presentation.view.theming.Dimens.SmallIconSize
+import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
 import org.mobile.scheduleapp.screens.detailedScheduleScreen.TopBar
-import org.mobile.scheduleapp.theming.Dimens
-import org.mobile.scheduleapp.theming.Dimens.SmallIconSize
-import org.mobile.scheduleapp.theming.ScheduleAppTheme
+
 
 @Composable
 fun ProfileScreen(
