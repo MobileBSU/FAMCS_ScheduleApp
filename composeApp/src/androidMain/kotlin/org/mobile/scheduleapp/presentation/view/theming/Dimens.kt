@@ -14,4 +14,7 @@ object Dimens {
     val CodeInputTextFieldCorner = 12.dp
     val SmallCornerShape = 10.dp
     val DetailedPadding = 10.dp
+    val IconSize = 82.dp
+    val SmallIconSize = 25.dp
+    val MediumCornerShape = 30.dp
 }
