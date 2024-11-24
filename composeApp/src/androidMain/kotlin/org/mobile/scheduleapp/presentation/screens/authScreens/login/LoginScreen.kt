@@ -67,7 +67,7 @@ fun LoginScreen(
         onEmailChange = { input ->
             viewModel.updateEmail(input)
         },
-        onPasswordChange = viewModel::updateEmail,
+        onPasswordChange = viewModel::updatePassword,
         onForgotPasswordClicked = {},
         onButtonLoginClicked = viewModel::signIn,
         onRegisterClicked = {
@@ -77,7 +77,6 @@ fun LoginScreen(
         },
         onNavigateToHome = {}
     )
-
     LaunchedEffect(key1 = state.authenticationSucceed){
         if (state.authenticationSucceed) {
             navController.navigate(AppRoute.MySchedule.route) {

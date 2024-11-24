@@ -23,8 +23,8 @@ internal data class AuthResponse(
 
 @Serializable
 internal data class AuthResponseData (
-    val id: Int,
+    val id: Long,
     val name: String,
-    val avatar: String? = null,
+    val imageUrl: String? = null,
     val token: String
 )
