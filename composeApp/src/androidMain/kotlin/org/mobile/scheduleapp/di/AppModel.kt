@@ -9,6 +9,7 @@ import org.mobile.scheduleapp.presentation.MainActivityViewModel
 import org.mobile.scheduleapp.presentation.screens.authScreens.AuthViewModel
 import org.mobile.scheduleapp.presentation.screens.authScreens.login.LoginViewModel
 import org.mobile.scheduleapp.presentation.screens.authScreens.signup.SignUpViewModel
+import org.mobile.scheduleapp.presentation.screens.searchScreens.groupSearchScreen.GroupSearchViewModel
 import java.io.File
 
 val appModule = module{
@@ -16,6 +17,7 @@ val appModule = module{
     viewModel { SignUpViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get())}
     viewModel { MainActivityViewModel(get()) }
+    viewModel { GroupSearchViewModel(get(), get()) }
 
 
     single {

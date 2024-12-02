@@ -18,7 +18,12 @@ fun MyScheduleScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    Text("Main")
+    MyScheduleScreenLayout(
+        onBackIconClicked = {},
+        onCardClicked = {},
+        label = "",
+        scheduleItems = emptyList()
+    )
 }
 
 @Composable

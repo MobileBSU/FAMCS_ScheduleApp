@@ -13,8 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.mobile.scheduleapp.R
-import org.mobile.scheduleapp.presentation.screens.searchScreens.Group
-import org.mobile.scheduleapp.presentation.screens.searchScreens.GroupItem
+import org.mobile.scheduleapp.presentation.screens.searchScreens.groupSearchScreen.Group
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
 
@@ -42,18 +41,6 @@ fun GroupCard(
                     shape = RoundedCornerShape(Dimens.SmallCornerShape)
                 ),
             group = group
-        )
-    }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-private fun Preview() {
-    ScheduleAppTheme {
-        GroupCard(
-            group = Group(course = 4, groupNum = 13, faculty = "ФПМИ", major = "ПИ"),
-            onGroupClicked = {}
         )
     }
 }

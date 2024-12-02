@@ -15,7 +15,7 @@ import org.mobile.scheduleapp.presentation.view.components.GroupCard
 import org.mobile.scheduleapp.presentation.view.components.LectureCard
 import org.mobile.scheduleapp.presentation.screens.ClassItem
 import org.mobile.scheduleapp.screens.detailedScheduleScreen.TopBar
-import org.mobile.scheduleapp.presentation.screens.searchScreens.Group
+import org.mobile.scheduleapp.presentation.screens.searchScreens.groupSearchScreen.Group
 import org.mobile.scheduleapp.presentation.screens.searchScreens.Lecturer
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
@@ -63,9 +63,8 @@ fun DetailedClassScreenLayout(
 
         val group = Group(
             course = 4,
-            groupNum = 13,
-            faculty = "ФПМИ",
-            major = "ПИ"
+            groupNumber = 13,
+            name = "ПИ"
         )
 
         item {
