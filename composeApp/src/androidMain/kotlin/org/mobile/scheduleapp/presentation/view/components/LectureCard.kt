@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.mobile.scheduleapp.R
-import org.mobile.scheduleapp.presentation.screens.searchScreens.Lecturer
+import org.mobile.scheduleapp.presentation.screens.searchScreens.lecturersSearchScreen.Lecturer
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
 

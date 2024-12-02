@@ -18,7 +18,6 @@ class GroupSearchViewModel(
 ): StatefulViewModel<GroupUiState>(GroupUiState()), GroupSearchController {
 
     init {
-        Log.d("GroupState", "I inited")
         getAllGroups()
     }
 
@@ -32,9 +31,7 @@ class GroupSearchViewModel(
 
     private fun getAllGroups() {
         viewModelScope.launch {
-            val response = groupsUseCase.invoke()
-            Log.d("GroupState", "here is response: ${response.message}")
-
+            val response = groupsUseCase()
             updateState {
                 when (response) {
                     is Result.Success -> {
@@ -58,7 +55,7 @@ class GroupSearchViewModel(
 
     override fun getGroupByName(input: String){
         viewModelScope.launch {
-            val response = groupsByNameUseCase.invoke(input)
+            val response = groupsByNameUseCase(input)
 
             updateState {
                 when (response) {

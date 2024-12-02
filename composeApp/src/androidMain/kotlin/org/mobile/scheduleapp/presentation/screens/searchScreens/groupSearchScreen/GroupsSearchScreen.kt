@@ -50,7 +50,7 @@ fun  GroupSearchScreen(modifier: Modifier = Modifier) {
     val viewModel: GroupSearchViewModel = koinViewModel()
     val state = viewModel.uiState.collectAsState().value
 
-    GroupSearchLayout(state = state, controller = viewModel)
+    GroupSearchLayout(modifier = modifier, state = state, controller = viewModel)
 
 }
 @Composable

@@ -16,7 +16,7 @@ import org.mobile.scheduleapp.presentation.view.components.LectureCard
 import org.mobile.scheduleapp.presentation.screens.ClassItem
 import org.mobile.scheduleapp.screens.detailedScheduleScreen.TopBar
 import org.mobile.scheduleapp.presentation.screens.searchScreens.groupSearchScreen.Group
-import org.mobile.scheduleapp.presentation.screens.searchScreens.Lecturer
+import org.mobile.scheduleapp.presentation.screens.searchScreens.lecturersSearchScreen.Lecturer
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
 
