@@ -54,10 +54,15 @@ private val allLecturers = listOf(
 )
 
 @Composable
-fun LecturersSearchScreen(modifier: Modifier = Modifier){
-    val viewModel: SearchViewModel = viewModel()
-    val searchText by viewModel.searchText.collectAsState()
-    val lecturers by viewModel.groups.collectAsState()
+fun LecturersSearchScreen(modifier: Modifier = Modifier) {
+
+}
+
+@Composable
+fun LecturersSearchScreenLayout(
+    modifier: Modifier = Modifier,
+    searchText: String,
+) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -67,7 +72,7 @@ fun LecturersSearchScreen(modifier: Modifier = Modifier){
             .padding(8.dp)
     ) {
         Header(stringResource(id = R.string.all_lectures))
-        CustomSearchBar(searchText = searchText, onTextChange = viewModel::onSearchTextChange)
+        CustomSearchBar(searchText = searchText, onTextChange = {  })
         Spacer(modifier = Modifier.height(16.dp))
         if (searchText.isNotBlank()) {
             LecturerList(allLecturers, searchText)

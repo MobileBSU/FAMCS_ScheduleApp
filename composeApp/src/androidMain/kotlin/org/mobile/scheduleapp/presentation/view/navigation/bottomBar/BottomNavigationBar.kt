@@ -32,25 +32,25 @@ fun BottomNavigationBar(navController: NavController) {
             stringResource(id = R.string.my_schedule),
             painterResource(id = R.drawable.selected_heart),
             painterResource(id = R.drawable.unselected_heart),
-            "my_schedule"
+            "main/my_schedule"
         ),
         BottomNavigationItem(
             stringResource(id = R.string.schedule),
             painterResource(id = R.drawable.selected_schedule),
             painterResource(id = R.drawable.unselected_schedule),
-            "schedule"
+            "main/schedule"
         ),
         BottomNavigationItem(
             stringResource(id = R.string.lecture),
             painterResource(id = R.drawable.selected_lecture),
             painterResource(id = R.drawable.unselected_lecture),
-            "lecture"
+            "main/lecture"
         ),
         BottomNavigationItem(
             stringResource(id = R.string.profile),
             painterResource(id = R.drawable.selected_profile),
             painterResource(id = R.drawable.unselected_profile),
-            "profile"
+            "main/profile"
         )
     )
 

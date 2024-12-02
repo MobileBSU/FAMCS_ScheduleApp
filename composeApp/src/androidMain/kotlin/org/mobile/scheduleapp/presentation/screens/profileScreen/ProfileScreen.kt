@@ -1,4 +1,4 @@
-package org.mobile.scheduleapp.screens.profileScreen
+package org.mobile.scheduleapp.presentation.screens.profileScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
