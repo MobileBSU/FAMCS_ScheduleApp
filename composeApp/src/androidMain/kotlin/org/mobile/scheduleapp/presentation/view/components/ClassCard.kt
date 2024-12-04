@@ -23,7 +23,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import org.mobile.scheduleapp.presentation.screens.detailedScheduleScreen.SubjectUiItem
-import org.mobile.scheduleapp.presentation.screens.myscheduleScreen.ClassItem
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.NeutralDarkDarkest
 import org.mobile.scheduleapp.presentation.view.theming.NeutralDarkLightest
