@@ -57,6 +57,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
             api(libs.ktor.serialization.kotlinx.json)
             api(libs.koin.core)
         }
@@ -102,5 +103,8 @@ android {
     dependencies {
         debugImplementation(compose.uiTooling)
     }
+}
+dependencies {
+    implementation(libs.protolite.well.known.types)
 }
 

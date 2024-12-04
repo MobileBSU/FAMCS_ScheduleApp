@@ -49,4 +49,6 @@
     <string name="save">Save\n</string>
     <string name="empty">" "</string>
     <string name="famcs">ФПМИ</string>
+    <string name="L">Л</string>
+    <string name="P">П</string>
 </resources>

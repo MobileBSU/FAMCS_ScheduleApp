@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.mobile.scheduleapp.R
-import org.mobile.scheduleapp.presentation.screens.ClassItem
+import org.mobile.scheduleapp.presentation.screens.myscheduleScreen.ClassItem
 import org.mobile.scheduleapp.screens.searchScreens.Divider
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.NeutralDarkLightest

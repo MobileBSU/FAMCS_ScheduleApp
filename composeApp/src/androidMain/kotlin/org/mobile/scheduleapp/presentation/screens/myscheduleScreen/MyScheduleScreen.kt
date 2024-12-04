@@ -1,14 +1,18 @@
-package org.mobile.scheduleapp.presentation.screens
+package org.mobile.scheduleapp.presentation.screens.myscheduleScreen
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import org.koin.androidx.compose.koinViewModel
+import org.mobile.scheduleapp.presentation.screens.detailedScheduleScreen.DetailedLectureViewModel
+import org.mobile.scheduleapp.presentation.screens.detailedScheduleScreen.ScheduleController
+import org.mobile.scheduleapp.presentation.screens.detailedScheduleScreen.ScheduleUiState
 import org.mobile.scheduleapp.screens.detailedScheduleScreen.DaySchedule
 import org.mobile.scheduleapp.screens.detailedScheduleScreen.TopBar
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
@@ -18,21 +22,24 @@ fun MyScheduleScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
+    val viewModel: DetailedLectureViewModel = koinViewModel()
+    val state = viewModel.uiState.collectAsState().value
+
     MyScheduleScreenLayout(
         onBackIconClicked = {},
         onCardClicked = {},
         label = "",
-        scheduleItems = emptyList()
+        state = state
     )
 }
 
 @Composable
 fun MyScheduleScreenLayout(
     modifier: Modifier = Modifier,
+    state: ScheduleUiState,
     onBackIconClicked: () -> Unit,
     onCardClicked: () -> Unit,
     label: String,
-    scheduleItems: List<ScheduleItem>
 ) {
     LazyColumn(
         modifier = modifier
@@ -43,23 +50,21 @@ fun MyScheduleScreenLayout(
             TopBar(
                 title = label,
                 onBackIconClicked = onBackIconClicked
-
             )
         }
 
         item { Spacer(modifier = Modifier.height(Dimens.LargeSpaceBetween)) }
 
-        items(scheduleItems.size) { index ->
-            DaySchedule(
-                scheduleItems[index],
-                onCardClicked
-            )
+        state.list?.let { schedule ->
+            items(schedule.size) { index ->
+                DaySchedule(
+                    schedule[index],
+                    onCardClicked
+                )
+            }
         }
+
     }
 }
 
-
-
-data class ScheduleItem(val day: String, val classes: List<ClassItem>)
-data class ClassItem(val time: String, val type: String,val name : String, val room: String, val group: Int? = null, val date:String)
 

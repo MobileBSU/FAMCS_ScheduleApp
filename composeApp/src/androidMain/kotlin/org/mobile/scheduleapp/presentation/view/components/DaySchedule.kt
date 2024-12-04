@@ -7,11 +7,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.mobile.scheduleapp.presentation.screens.ScheduleItem
+import org.mobile.scheduleapp.presentation.screens.detailedScheduleScreen.SubjectsUi
 
 @Composable
 fun DaySchedule(
-    scheduleItem: ScheduleItem,
+    scheduleItem: SubjectsUi,
     onCardClicked: () -> Unit
 ) {
     Column(modifier = Modifier.padding(vertical = 8.dp)) {
@@ -22,7 +22,7 @@ fun DaySchedule(
         )
 
         Column {
-            scheduleItem.classes.forEach { classItem ->
+            scheduleItem.subjects?.forEach { classItem ->
                 ClassCard(
                     classItem = classItem,
                     onCardClicked = onCardClicked

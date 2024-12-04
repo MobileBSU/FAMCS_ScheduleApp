@@ -86,6 +86,7 @@ data class GroupUiState(
 )
 
 data class Group(
+    val id: Long = 0,
     val course: Int = 0,
     val groupNumber: Int = 0,
     val name: String = "",
