@@ -34,11 +34,11 @@
 - **Фреймворки и библиотеки**:
   - Android SDK
   - Jetpack Compose + Material Design
-  - Retrofit (для сетевых запросов)
+  - Ktor (для сетевых запросов)
   - Coroutines + Flow (для работы с асинхронными потоками данных)
-  - Dagger/Hilt (для внедрения зависимостей)
+  - Koin (для внедрения зависимостей)
   - Coil (для работы с изображениями)
-  - MVVM / MVI (архитектурные паттерны)
+  - MVVM (архитектурные паттерны)
   - JUnit + Mockito (тестирование)
  ### Платформа IOS
  - **Язык программирования**: Swift
@@ -54,6 +54,9 @@
 
 ### Дизайн:
 - **Figma**: [Ссылка на макет приложения](https://www.figma.com/design/96rNac0zYX7WNxXM3Bc9FT/ScheduleApp?node-id=0-1&m=dev)
+
+### Сервер: 
+- **Github**: [Ссылка на репозиторий серера](https://github.com/MobileBSU/FAMCS_Schedule_Server)
 
 ## Пример архитектуры базы данных
 ![База данных](https://github.com/user-attachments/assets/4e5e3511-b717-4efd-8399-b76b5607b987)
