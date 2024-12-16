@@ -7,4 +7,6 @@ internal interface SearchTeacherRepository {
     suspend fun getAllTeachers(): Result<List<TeacherSearchResultData>>
 
     suspend fun getTeacherByName(name: String): Result<List<TeacherSearchResultData>>
+
+    suspend fun getTeacherById(id: Long): Result<List<TeacherSearchResultData>>
 }

@@ -5,9 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.androidx.compose.koinViewModel
-import org.mobile.scheduleapp.presentation.screens.myscheduleScreen.ClassItem
 import org.mobile.scheduleapp.presentation.screens.myscheduleScreen.MyScheduleScreenLayout
-import org.mobile.scheduleapp.presentation.screens.myscheduleScreen.ScheduleItem
 import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
 
 @Composable

@@ -13,4 +13,8 @@ internal class SearchTeacherService: KtorApi() {
     suspend fun getTeacherByName(name: String): TeacherResponse = client.get {
         endPoint(path = "teachers/${name}")
     }.body()
+
+    suspend fun getTeacherById(id: Long): TeacherResponse = client.get {
+        endPoint(path = "teacher/${id}")
+    }.body()
 }

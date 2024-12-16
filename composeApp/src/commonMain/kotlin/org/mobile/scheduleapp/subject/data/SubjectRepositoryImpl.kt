@@ -53,4 +53,26 @@ internal class SubjectRepositoryImpl(
             }
         }
     }
+
+    override suspend fun getSubjectById(id: Long): Result<List<SubjectResultData>> {
+        return withContext(dispatcher.io) {
+            try {
+                val subjectResponse = subjectService.getSubjectById(id)
+
+                if(subjectResponse.data == null) {
+                    Result.Error(
+                        message = subjectResponse.errorMessage!!
+                    )
+                } else {
+                    Result.Success(
+                        data = subjectResponse.data.map { it.toSubjectResultData()}
+                    )
+                }
+            } catch (e: Exception) {
+                Result.Error(
+                    message = e.message
+                )
+            }
+        }
+    }
 }

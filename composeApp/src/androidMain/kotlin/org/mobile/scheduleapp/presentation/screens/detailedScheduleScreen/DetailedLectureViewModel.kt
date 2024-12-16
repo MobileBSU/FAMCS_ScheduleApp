@@ -99,5 +99,6 @@ data class SubjectUiItem(
     val endTime: String,
     val classRoom: Int,
     val groupId: Long?,
+    val teacherId: Long,
     @StringRes val lectureType: Int
 )

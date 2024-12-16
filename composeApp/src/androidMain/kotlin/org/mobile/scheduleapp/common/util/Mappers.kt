@@ -3,8 +3,9 @@ package org.mobile.scheduleapp.common.util
 import SubjectResultData
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.ui.res.stringResource
 import org.mobile.scheduleapp.R
+import org.mobile.scheduleapp.presentation.screens.detailedClassScreen.DetailedClassUiState
+import org.mobile.scheduleapp.presentation.screens.detailedClassScreen.DetailedSubjectUiItem
 import org.mobile.scheduleapp.presentation.screens.detailedScheduleScreen.ScheduleUiState
 import org.mobile.scheduleapp.presentation.screens.detailedScheduleScreen.SubjectUiItem
 import org.mobile.scheduleapp.presentation.screens.detailedScheduleScreen.SubjectsUi
@@ -57,6 +58,7 @@ fun List<SubjectResultData>.toScheduleUiState(id: Long): List<ScheduleUiState> {
                 endTime = subject.endTime,
                 classRoom = subject.classRoom,
                 groupId = subject.groupId,
+                teacherId = subject.teacherId,
                 lectureType = if(subject.isLecture) R.string.L else R.string.P,
             )
         }
@@ -75,4 +77,36 @@ fun List<SubjectResultData>.toScheduleUiState(id: Long): List<ScheduleUiState> {
             list = uiSubjects
         )
     }
+}
+
+fun List<SubjectResultData>.toSubject(): DetailedClassUiState {
+
+    val subject: SubjectResultData = this.first()
+
+    val day: Int = when(subject.dayOfWeek){
+        1 -> R.string.monday
+        2 -> R.string.tuesday
+        3 -> R.string.wednesday
+        4 -> R.string.thursday
+        5 -> R.string.friday
+        6 -> R.string.saturday
+        else -> {R.string.na}
+    }
+
+    val subjectUiItem = DetailedSubjectUiItem(
+        name = subject.name,
+        day = day,
+        startTime = subject.startTime,
+        endTime = subject.endTime,
+        classRoom = subject.classRoom,
+        lectureType = if(subject.isLecture) R.string.lecture else R.string.practice
+    )
+
+
+    return DetailedClassUiState(
+        id = subject.id,
+        teacherId = subject.id,
+        groupId = subject.groupId,
+        subjectUiItem = subjectUiItem
+    )
 }

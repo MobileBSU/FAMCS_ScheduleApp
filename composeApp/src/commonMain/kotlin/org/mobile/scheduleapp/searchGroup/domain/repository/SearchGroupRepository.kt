@@ -9,4 +9,6 @@ internal interface SearchGroupRepository {
     suspend fun getGroupByName(
         input: String
     ): Result<List<GroupSearchResultData>>
+
+    suspend fun getGroupById(id: Long): Result<List<GroupSearchResultData>>
 }

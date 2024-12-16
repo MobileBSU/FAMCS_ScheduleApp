@@ -13,4 +13,8 @@ internal class SubjectService: KtorApi() {
     suspend fun getSubjectsByTeacher(id: Long): SubjectResponse = client.get {
         endPoint(path = "subject/teacher/${id}")
     }.body()
+
+    suspend fun getSubjectById(id: Long): SubjectResponse = client.get {
+        endPoint(path = "subject/${id}")
+    }.body()
 }

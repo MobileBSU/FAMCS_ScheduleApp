@@ -48,7 +48,15 @@
     <string name="surname">Surname</string>
     <string name="save">Save\n</string>
     <string name="empty">" "</string>
-    <string name="famcs">ФПМИ</string>
-    <string name="L">Л</string>
-    <string name="P">П</string>
+    <string name="famcs">Fpmi</string>
+    <string name="L">L</string>
+    <string name="P">P</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="na">n/a</string>
+    <string name="practice">Practice</string>
 </resources>

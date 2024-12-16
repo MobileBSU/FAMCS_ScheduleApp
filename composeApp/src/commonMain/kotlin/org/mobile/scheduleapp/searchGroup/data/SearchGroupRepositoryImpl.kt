@@ -55,4 +55,26 @@ internal class SearchGroupRepositoryImpl(
             }
         }
     }
+
+    override suspend fun getGroupById(id: Long): Result<List<GroupSearchResultData>> {
+        return withContext(dispatcher.io) {
+            try {
+                val groupSearchResponse = searchGroupService.getGroupById(id)
+
+                if (groupSearchResponse.data == null) {
+                    Result.Error(
+                        message = groupSearchResponse.errorMessage
+                    )
+                } else {
+                    Result.Success(
+                        data = groupSearchResponse.data.map { it.toGroupSearchResultData() }
+                    )
+                }
+            } catch (e: Exception) {
+                Result.Error(
+                    message = "Oops, we couldn`t send your request"
+                )
+            }
+        }
+    }
 }
