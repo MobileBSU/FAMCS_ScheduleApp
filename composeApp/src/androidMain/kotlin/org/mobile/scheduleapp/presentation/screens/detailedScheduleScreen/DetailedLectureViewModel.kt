@@ -1,6 +1,7 @@
 package org.mobile.scheduleapp.presentation.screens.detailedScheduleScreen
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
@@ -54,6 +55,8 @@ class DetailedLectureViewModel(
         viewModelScope.launch {
             val result = subjectsByGroupUseCase(id)
 
+            Log.d("CHECK3", result.data.toString())
+
             updateState {
                 when (result) {
                     is Result.Success -> {
@@ -69,6 +72,9 @@ class DetailedLectureViewModel(
                     else -> this
                 }
             }
+
+            Log.d("CHECK3-1", state.list.toString())
+
         }
     }
 

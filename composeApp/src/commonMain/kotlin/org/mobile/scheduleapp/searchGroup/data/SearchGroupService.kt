@@ -11,9 +11,8 @@ internal class SearchGroupService: KtorApi() {
         endPoint(path = "groups")
     }.body()
 
-    suspend fun getGroupsByName(request: GroupSearchRequest): GroupSearchResponse = client.get {
-        endPoint(path = "groupByName")
-        setBody(request)
+    suspend fun getGroupsByName(name: String): GroupSearchResponse = client.get {
+        endPoint(path = "groupByName/${name}")
     }.body()
 
     suspend fun getGroupById(id: Long): GroupSearchResponse = client.get {

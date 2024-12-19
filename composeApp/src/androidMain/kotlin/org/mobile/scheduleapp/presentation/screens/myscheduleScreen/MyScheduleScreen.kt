@@ -1,5 +1,8 @@
 package org.mobile.scheduleapp.presentation.screens.myscheduleScreen
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -17,12 +20,19 @@ import org.mobile.scheduleapp.screens.detailedScheduleScreen.DaySchedule
 import org.mobile.scheduleapp.screens.detailedScheduleScreen.TopBar
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MyScheduleScreen(
     navController: NavController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    groupId: Long? = null
 ) {
     val viewModel: DetailedLectureViewModel = koinViewModel()
+
+    groupId?.let {
+        viewModel.getGroupSubject(it)
+    }
+
     val state = viewModel.uiState.collectAsState().value
 
     MyScheduleScreenLayout(
@@ -31,8 +41,8 @@ fun MyScheduleScreen(
         label = "",
         state = state
     )
-}
 
+}
 @Composable
 fun MyScheduleScreenLayout(
     modifier: Modifier = Modifier,

@@ -10,11 +10,6 @@ internal data class GroupSearchResponse(
 
 
 @Serializable
-data class GroupSearchRequest(
-    val input: String
-)
-
-@Serializable
 internal data class GroupSearchResponseData (
     val id: Long,
     val course: Int,

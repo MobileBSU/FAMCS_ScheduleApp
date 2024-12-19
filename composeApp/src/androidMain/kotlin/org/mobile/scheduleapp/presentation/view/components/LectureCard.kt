@@ -63,7 +63,7 @@ fun LectureCard(
             ) {}
 
             Text(
-                text = lecture.fio,
+                text = lecture.name,
                 style = MaterialTheme.typography.bodyLarge
             )
 
@@ -82,15 +82,5 @@ fun LectureCard(
 @Composable
 private fun Preview() {
 
-    val lecture = Lecturer(
-        fio = "Казанцева Ольга Геннадьевна",
-        faculty = "ФПМИ",
-        department = "МСС",
-        imageUrl = "")
 
-    ScheduleAppTheme {
-        LectureCard(
-            lecture = lecture,
-            onLectureClicked = {})
-    }
 }

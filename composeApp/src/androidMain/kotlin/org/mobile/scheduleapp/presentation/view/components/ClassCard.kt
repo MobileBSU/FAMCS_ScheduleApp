@@ -48,7 +48,7 @@ fun ClassCard(
         horizontalArrangement = Arrangement.spacedBy(Dimens.LargeSpaceBetween)
     ) {
         Text(
-            text = classItem.startTime,
+            text = classItem.startTime + " - " + classItem.endTime,
             style = MaterialTheme.typography.bodySmall,
             color = NeutralDarkDarkest
         )

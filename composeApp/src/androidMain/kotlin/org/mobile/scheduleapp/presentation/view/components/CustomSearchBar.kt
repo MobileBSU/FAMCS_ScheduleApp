@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.mobile.scheduleapp.R
 import org.mobile.scheduleapp.presentation.view.theming.Dimens.SearchBarIconSize
+import org.mobile.scheduleapp.presentation.view.theming.NeutralLightLight
 import org.mobile.scheduleapp.presentation.view.theming.NeutralLightMedium
 import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
 
@@ -44,13 +45,30 @@ fun CustomSearchBar(searchText: String, onTextChange: (String) -> Unit) {
         },
         textStyle = MaterialTheme.typography.labelMedium,
         colors = TextFieldDefaults.colors(
-            Color.Black
-        )
+            focusedContainerColor = NeutralLightLight,
+            disabledContainerColor = NeutralLightLight,
+            unfocusedContainerColor = NeutralLightLight,
+            errorContainerColor = NeutralLightLight,
+            focusedTextColor = Color.Black,
+            disabledTextColor = Color.Black,
+            unfocusedTextColor = Color.Black,
+            errorTextColor = Color.Black,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+
+//            containerColor = NeutralLightMedium,
+//            textColor = Color.Black,
+//            placeholderColor = Color.Gray,
+//            cursorColor = Color.Black,
+//            focusedIndicatorColor = Color.Transparent,
+//            unfocusedIndicatorColor = Color.Transparent
+        ),
+        singleLine = true
     )
 }
 
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun prev() {
     ScheduleAppTheme {

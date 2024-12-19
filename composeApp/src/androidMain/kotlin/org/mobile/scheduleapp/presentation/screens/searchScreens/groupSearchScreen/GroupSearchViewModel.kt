@@ -46,17 +46,18 @@ class GroupSearchViewModel(
                     }
                 }
             }
-
-            Log.d("GroupState", " size ${state.groups?.size}")
-
-
         }
     }
 
     override fun getGroupByName(input: String){
-        viewModelScope.launch {
-            val response = groupsByNameUseCase(input)
 
+
+        Log.d("Check1-2", input)
+        viewModelScope.launch {
+            if (input.isBlank()){
+                getAllGroups()
+            }
+            val response = groupsByNameUseCase(input)
             updateState {
                 when (response) {
                     is Result.Success -> {
@@ -65,12 +66,16 @@ class GroupSearchViewModel(
                     }
                     is Result.Error -> {
                         copy(
+                            groups = null,
                             errorMessage =  response.message ?: "An unknown error occurred"
                         )
                     }
                 }
             }
         }
+
+        Log.d("Check1-2", state.errorMessage.toString())
+
     }
 
     override fun updateSearchText(input: String) {

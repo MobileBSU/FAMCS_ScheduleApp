@@ -13,4 +13,6 @@ sealed class AppRoute(val route: String) {
     object Lecture : AppRoute("main/lecture")
     object Profile : AppRoute("main/profile")
 
+    object DetailedGroup : AppRoute("main/schedule/{group}")
+
 }

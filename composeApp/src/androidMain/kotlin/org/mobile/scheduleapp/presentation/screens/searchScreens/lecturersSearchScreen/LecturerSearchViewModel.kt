@@ -21,7 +21,7 @@ class LecturerSearchViewModel(
     }
 
     val uiState: StateFlow<LecturerUiState>
-        get() = uiState.stateIn(
+        get() = stateFlow.stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,
             initialValue = state

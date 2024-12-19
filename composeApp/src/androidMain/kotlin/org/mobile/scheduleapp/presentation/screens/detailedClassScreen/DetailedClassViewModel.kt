@@ -7,10 +7,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import org.mobile.scheduleapp.common.util.Result
-import org.mobile.scheduleapp.common.util.toScheduleUiState
 import org.mobile.scheduleapp.common.util.toSubject
 import org.mobile.scheduleapp.common.util.toUiState
-import org.mobile.scheduleapp.presentation.screens.detailedScheduleScreen.SubjectUiItem
 import org.mobile.scheduleapp.presentation.screens.searchScreens.groupSearchScreen.Group
 import org.mobile.scheduleapp.presentation.screens.searchScreens.lecturersSearchScreen.Lecturer
 import org.mobile.scheduleapp.presentation.utils.StatefulViewModel
@@ -24,11 +22,6 @@ class DetailedClassViewModel(
     private val getGroupByIdUseCase: GetGroupByIdUseCase
 ): StatefulViewModel<DetailedClassUiState>(DetailedClassUiState()){
 
-    init {
-        getSubject(-1)
-        getTeacher(-1)
-        getGroup(-1)
-    }
 
     val uiState: StateFlow<DetailedClassUiState>
         get() = stateFlow.stateIn(
@@ -37,7 +30,7 @@ class DetailedClassViewModel(
             initialValue = state
         )
 
-    private fun getSubject(id: Long) {
+    fun getSubject(id: Long) {
         viewModelScope.launch {
             val result = getSubjectByIdUseCase(id)
 
@@ -62,7 +55,7 @@ class DetailedClassViewModel(
         }
     }
 
-    private fun getTeacher(id: Long) {
+    fun getTeacher(id: Long) {
         viewModelScope.launch {
             val result = getTeacherByIdUseCase(id)
 
@@ -85,7 +78,7 @@ class DetailedClassViewModel(
         }
     }
 
-    private fun getGroup(id: Long) {
+    fun getGroup(id: Long) {
         viewModelScope.launch {
             val result = getGroupByIdUseCase(id)
 

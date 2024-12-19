@@ -1,5 +1,6 @@
 package org.mobile.scheduleapp.screens.searchScreens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,12 +24,14 @@ import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
 @Composable
 fun GroupItem(
     modifier: Modifier = Modifier,
-    group: Group
+    group: Group,
+    onItemClicked: (Long) -> Unit
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = Dimens.MainHorizontalPadding)
+            .clickable { onItemClicked(group.id) }
     ) {
         Text(
             text ="${group.groupNumber} группа" ,

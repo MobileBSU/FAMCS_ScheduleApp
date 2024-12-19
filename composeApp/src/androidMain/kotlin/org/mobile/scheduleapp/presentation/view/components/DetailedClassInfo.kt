@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import org.mobile.scheduleapp.R
-import org.mobile.scheduleapp.presentation.screens.myscheduleScreen.ClassItem
+import org.mobile.scheduleapp.presentation.screens.detailedClassScreen.DetailedSubjectUiItem
 import org.mobile.scheduleapp.screens.searchScreens.Divider
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.NeutralDarkLightest
@@ -26,7 +26,7 @@ import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
 @Composable
 fun DetailsClassInfo(
     modifier: Modifier = Modifier,
-    classItem: ClassItem
+    classItem: DetailedSubjectUiItem
 ) {
     Column(
         modifier = modifier
@@ -54,23 +54,20 @@ fun DetailsClassInfo(
 
             InfoRow(
                 label = R.string.time,
-                text = classItem.time
+                text = classItem.startTime + " - " + classItem.endTime
             )
             InfoRow(
                 label = R.string.date,
-                text = classItem.date
+                text = stringResource(classItem.day)
             )
             InfoRow(
                 label = R.string.type,
-                text = classItem.type
+                text = stringResource(classItem.lectureType)
             )
-            InfoRow(
-                label = R.string.group,
-                text = if (classItem.group == null) stringResource(R.string.full) else classItem.group.toString()
-            )
+
             InfoRow(
                 label = R.string.room,
-                text = classItem.room
+                text = classItem.classRoom.toString()
             )
 
         }
@@ -112,9 +109,4 @@ fun InfoRow(
 @Composable
 private fun Preview() {
 
-    val classItem = ClassItem("8:15 - 9:35", "Л", "ОиМП", "605", date = "3 October")
-
-    ScheduleAppTheme {
-        DetailsClassInfo(classItem = classItem)
-    }
 }
