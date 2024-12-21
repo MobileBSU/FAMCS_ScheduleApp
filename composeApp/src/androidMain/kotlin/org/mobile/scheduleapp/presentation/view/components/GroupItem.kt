@@ -14,7 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import org.mobile.scheduleapp.R
 import org.mobile.scheduleapp.presentation.screens.searchScreens.groupSearchScreen.Group
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.NeutralLightMedium
@@ -43,7 +45,7 @@ fun GroupItem(
             horizontalArrangement = Arrangement.spacedBy(Dimens.LargeSpaceBetween),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            InfoText(text = "FAMCS")
+            InfoText(text = stringResource(R.string.famcs))
             Dot()
             InfoText(text = group.name)
             Dot()

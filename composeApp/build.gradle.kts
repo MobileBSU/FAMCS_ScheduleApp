@@ -42,6 +42,8 @@ kotlin {
             implementation(libs.koin.androidx.compose)
             implementation("androidx.datastore:datastore-core:1.0.0-alpha08")
             implementation(libs.ktor.client.android)
+            implementation(libs.coil.compose)
+            implementation("io.coil-kt.coil3:coil-network-ktor3:3.0.4")
             api(libs.koin.android)
         }
         commonMain.dependencies {

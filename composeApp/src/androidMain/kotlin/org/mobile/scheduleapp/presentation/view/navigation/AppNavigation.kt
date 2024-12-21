@@ -1,5 +1,7 @@
 package org.mobile.scheduleapp.presentation.view.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -13,6 +15,7 @@ import org.mobile.scheduleapp.presentation.view.navigation.graphs.mainNavGraph
 import org.mobile.scheduleapp.presentation.screens.authScreens.AuthViewModel
 import org.mobile.scheduleapp.presentation.view.navigation.graphs.splashNavGraph
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavigation(
     token: String?

@@ -1,5 +1,7 @@
 package org.mobile.scheduleapp.presentation.screens.profileScreen
 
+import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -22,23 +24,32 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil3.compose.rememberAsyncImagePainter
+import coil3.request.ImageRequest
 import org.mobile.scheduleapp.R
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.Dimens.SmallIconSize
 import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
 import org.mobile.scheduleapp.screens.detailedScheduleScreen.TopBar
 
-
 @Composable
 fun ProfileScreen(
+    modifier: Modifier = Modifier,
     navController: NavController
 ) {
-    
+    ProfileScreenLayout(
+        onEditClicked = {},
+        onNotificationClicked = {},
+        onLanguageClicked = {},
+        onPrivacyClicked = {},
+        onStorageClicked = {  }
+    )
 }
 
 @Composable
@@ -63,7 +74,7 @@ fun ProfileScreenLayout(
         Spacer(modifier = modifier.height(Dimens.LargeSpaceBetween))
 
         ProfileHeader(
-            profile = Profile("Lucas", id = "@lucaas", urlStr = ""),
+            profile = Profile("OG", id = "@lucaas", urlStr = ""),
             onEditClicked = onEditClicked
         )
         Spacer(modifier = Modifier.height(Dimens.MainVerticalPadding))
@@ -94,14 +105,19 @@ fun ProfileHeader(
         modifier = modifier.fillMaxWidth()
     ) {
         Box {
-            Box(
+            Image(
+                painter = rememberAsyncImagePainter(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data("https://bsu.by/upload/cacheResize/17d/558/e49acf52c0ce2df22be3b83d6c897ca9.jpg")
+                        .build()
+                ),
+                contentDescription = null,
 //                painter = painterResource(id = R.drawable.ic_profile_placeholder),
 //                contentDescription = "Profile Picture",
 //                contentScale = ContentScale.Crop,
                 modifier = modifier
                     .size(Dimens.IconSize)
                     .clip(RoundedCornerShape(Dimens.MediumCornerShape))
-                    .background(Color.LightGray)
             )
             Icon(
                 painter = painterResource(id = R.drawable.ic_edit),
