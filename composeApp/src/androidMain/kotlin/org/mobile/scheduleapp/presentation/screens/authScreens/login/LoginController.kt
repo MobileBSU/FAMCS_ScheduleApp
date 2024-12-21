@@ -4,3 +4,4 @@ interface LoginController {
     fun updateEmail(input: String)
     fun updatePassword(input: String)
 }
+

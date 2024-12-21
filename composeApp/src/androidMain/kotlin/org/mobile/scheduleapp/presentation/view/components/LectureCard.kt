@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.mobile.scheduleapp.R
-import org.mobile.scheduleapp.presentation.screens.searchScreens.Lecturer
+import org.mobile.scheduleapp.presentation.screens.searchScreens.lecturersSearchScreen.Lecturer
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
 
@@ -63,7 +63,7 @@ fun LectureCard(
             ) {}
 
             Text(
-                text = lecture.fio,
+                text = lecture.name,
                 style = MaterialTheme.typography.bodyLarge
             )
 
@@ -82,15 +82,5 @@ fun LectureCard(
 @Composable
 private fun Preview() {
 
-    val lecture = Lecturer(
-        fio = "Казанцева Ольга Геннадьевна",
-        faculty = "ФПМИ",
-        department = "МСС",
-        imageUrl = "")
 
-    ScheduleAppTheme {
-        LectureCard(
-            lecture = lecture,
-            onLectureClicked = {})
-    }
 }

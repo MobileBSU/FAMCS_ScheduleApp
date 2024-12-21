@@ -42,12 +42,13 @@ kotlin {
             implementation(libs.koin.androidx.compose)
             implementation("androidx.datastore:datastore-core:1.0.0-alpha08")
             implementation(libs.ktor.client.android)
+            implementation(libs.coil.compose)
+            implementation("io.coil-kt.coil3:coil-network-ktor3:3.0.4")
             api(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -57,6 +58,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
             api(libs.ktor.serialization.kotlinx.json)
             api(libs.koin.core)
         }
@@ -102,5 +104,8 @@ android {
     dependencies {
         debugImplementation(compose.uiTooling)
     }
+}
+dependencies {
+    implementation(libs.protolite.well.known.types)
 }
 

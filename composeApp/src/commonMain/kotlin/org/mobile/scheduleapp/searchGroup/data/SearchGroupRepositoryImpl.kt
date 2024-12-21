@@ -35,9 +35,7 @@ internal class SearchGroupRepositoryImpl(
     override suspend fun getGroupByName(input: String): Result<List<GroupSearchResultData>> {
         return withContext(dispatcher.io) {
             try {
-                val request = GroupSearchRequest(input)
-
-                val groupSearchResponse = searchGroupService.getGroupsByName(request)
+                val groupSearchResponse = searchGroupService.getGroupsByName(input)
 
                 if (groupSearchResponse.data == null) {
                     Result.Error(
@@ -50,7 +48,29 @@ internal class SearchGroupRepositoryImpl(
                 }
             } catch (e: Exception) {
                 Result.Error(
-                    message = "Oops, we couldn`t send your request"
+                    message = "Oops, we couldn`t send your request + $e"
+                )
+            }
+        }
+    }
+
+    override suspend fun getGroupById(id: Long): Result<List<GroupSearchResultData>> {
+        return withContext(dispatcher.io) {
+            try {
+                val groupSearchResponse = searchGroupService.getGroupById(id)
+
+                if (groupSearchResponse.data == null) {
+                    Result.Error(
+                        message = groupSearchResponse.errorMessage
+                    )
+                } else {
+                    Result.Success(
+                        data = groupSearchResponse.data.map { it.toGroupSearchResultData() }
+                    )
+                }
+            } catch (e: Exception) {
+                Result.Error(
+                    message = "Oops, we couldn`t send your request + $e"
                 )
             }
         }

@@ -20,15 +20,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import org.mobile.scheduleapp.presentation.screens.ClassItem
+import org.mobile.scheduleapp.presentation.screens.detailedScheduleScreen.SubjectUiItem
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.NeutralDarkDarkest
 import org.mobile.scheduleapp.presentation.view.theming.NeutralDarkLightest
 
 @Composable
 fun ClassCard(
-    classItem: ClassItem,
+    classItem: SubjectUiItem,
     modifier: Modifier = Modifier,
     onCardClicked: () -> Unit
 ) {
@@ -47,12 +48,12 @@ fun ClassCard(
         horizontalArrangement = Arrangement.spacedBy(Dimens.LargeSpaceBetween)
     ) {
         Text(
-            text = classItem.time,
+            text = classItem.startTime + " - " + classItem.endTime,
             style = MaterialTheme.typography.bodySmall,
             color = NeutralDarkDarkest
         )
         Text(
-            text = classItem.type,
+            text = stringResource(classItem.lectureType),
             style = MaterialTheme.typography.labelLarge,
             color = NeutralDarkDarkest
         )
@@ -66,13 +67,13 @@ fun ClassCard(
                 color = NeutralDarkDarkest
             )
             Text(
-                text = classItem.room,
+                text = classItem.classRoom.toString(),
                 style = MaterialTheme.typography.bodySmall,
                 color = NeutralDarkDarkest
             )
         }
 
-        classItem.group?.let {
+        classItem.groupId?.let {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {

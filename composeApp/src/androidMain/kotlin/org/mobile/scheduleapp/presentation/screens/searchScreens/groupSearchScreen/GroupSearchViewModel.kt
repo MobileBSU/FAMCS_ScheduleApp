@@ -18,7 +18,6 @@ class GroupSearchViewModel(
 ): StatefulViewModel<GroupUiState>(GroupUiState()), GroupSearchController {
 
     init {
-        Log.d("GroupState", "I inited")
         getAllGroups()
     }
 
@@ -32,9 +31,7 @@ class GroupSearchViewModel(
 
     private fun getAllGroups() {
         viewModelScope.launch {
-            val response = groupsUseCase.invoke()
-            Log.d("GroupState", "here is response: ${response.message}")
-
+            val response = groupsUseCase()
             updateState {
                 when (response) {
                     is Result.Success -> {
@@ -49,17 +46,18 @@ class GroupSearchViewModel(
                     }
                 }
             }
-
-            Log.d("GroupState", " size ${state.groups?.size}")
-
-
         }
     }
 
     override fun getGroupByName(input: String){
-        viewModelScope.launch {
-            val response = groupsByNameUseCase.invoke(input)
 
+
+        Log.d("Check1-2", input)
+        viewModelScope.launch {
+            if (input.isBlank()){
+                getAllGroups()
+            }
+            val response = groupsByNameUseCase(input)
             updateState {
                 when (response) {
                     is Result.Success -> {
@@ -68,12 +66,16 @@ class GroupSearchViewModel(
                     }
                     is Result.Error -> {
                         copy(
+                            groups = null,
                             errorMessage =  response.message ?: "An unknown error occurred"
                         )
                     }
                 }
             }
         }
+
+        Log.d("Check1-2", state.errorMessage.toString())
+
     }
 
     override fun updateSearchText(input: String) {
@@ -89,6 +91,7 @@ data class GroupUiState(
 )
 
 data class Group(
+    val id: Long = 0,
     val course: Int = 0,
     val groupNumber: Int = 0,
     val name: String = "",

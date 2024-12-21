@@ -16,6 +16,7 @@ import org.mobile.scheduleapp.R
 import org.mobile.scheduleapp.presentation.screens.searchScreens.groupSearchScreen.Group
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
+import org.mobile.scheduleapp.screens.searchScreens.GroupItem
 
 @Composable
 fun GroupCard(
@@ -33,6 +34,7 @@ fun GroupCard(
         )
 
         Spacer(modifier = modifier.height(Dimens.SmallVerticalPadding))
+
         GroupItem(
             modifier = modifier
                 .clickable { onGroupClicked() }
@@ -40,7 +42,8 @@ fun GroupCard(
                     color = MaterialTheme.colorScheme.surface,
                     shape = RoundedCornerShape(Dimens.SmallCornerShape)
                 ),
-            group = group
+            group = group,
+            onItemClicked = {}
         )
     }
 }

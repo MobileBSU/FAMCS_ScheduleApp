@@ -1,7 +1,9 @@
 package org.mobile.scheduleapp.presentation.screens.searchScreens.groupSearchScreen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,6 +30,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
@@ -37,6 +41,7 @@ import org.koin.androidx.compose.koinViewModel
 import org.mobile.scheduleapp.R
 import org.mobile.scheduleapp.presentation.screens.searchScreens.Header
 import org.mobile.scheduleapp.presentation.view.components.GroupList
+import org.mobile.scheduleapp.presentation.view.navigation.AppRoute
 import org.mobile.scheduleapp.presentation.view.theming.NeutralLightMedium
 import org.mobile.scheduleapp.presentation.view.theming.NeutralLightWhite
 import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
@@ -46,18 +51,29 @@ import org.mobile.scheduleapp.screens.searchScreens.Dot
 import org.mobile.scheduleapp.screens.searchScreens.InfoText
 
 @Composable
-fun  GroupSearchScreen(modifier: Modifier = Modifier) {
+fun  GroupSearchScreen(
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
     val viewModel: GroupSearchViewModel = koinViewModel()
     val state = viewModel.uiState.collectAsState().value
 
-    GroupSearchLayout(state = state, controller = viewModel)
+    GroupSearchLayout(
+        modifier = modifier,
+        state = state,
+        controller = viewModel,
+        onGroupClicked = {
+            navController.navigate(AppRoute.DetailedGroup.route.replace("{group}", it.toString()))
+        }
+    )
 
 }
 @Composable
 fun GroupSearchLayout(
     modifier: Modifier = Modifier,
     state: GroupUiState,
-    controller: GroupSearchController
+    controller: GroupSearchController,
+    onGroupClicked: (Long) -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -79,8 +95,18 @@ fun GroupSearchLayout(
 
         state.groups?.let {
             GroupList(
-                groups = it
+                groups = it,
+                onItemClicked = onGroupClicked
             )
+        }
+
+        if (state.groups == null) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "No such groups")
+            }
         }
     }
 }

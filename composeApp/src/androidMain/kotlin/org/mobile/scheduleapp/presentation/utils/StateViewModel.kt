@@ -17,3 +17,5 @@ abstract class StatefulViewModel<State : Any>(
         _stateFlow.value = transform.invoke(state)
     }
 }
+
+

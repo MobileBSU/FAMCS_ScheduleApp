@@ -2,8 +2,11 @@ package org.mobile.scheduleapp.presentation.view.navigation.bottomBar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -57,7 +60,7 @@ fun BottomNavigationBar(navController: NavController) {
     selectedItemIndex = items.indexOfFirst { it.route == navController.currentDestination?.route }
 
     NavigationBar(
-        containerColor = Color.White
+        containerColor = MaterialTheme.colorScheme.background
     ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
@@ -90,7 +93,11 @@ fun BottomNavigationBar(navController: NavController) {
                         color = if (selectedItemIndex == index) NeutralDarkDarkest else NeutralDarkLight,
                         style = TextStyle()
                     )
-                }
+                },
+                colors = NavigationBarItemDefaults.colors(
+                    indicatorColor = Color.Transparent,
+
+                )
             )
         }
     }
