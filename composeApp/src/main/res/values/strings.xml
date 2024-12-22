@@ -11,7 +11,7 @@
     <string name="search">Search</string>
     <string name="all_groups">All groups</string>
     <string name="all_lectures">All lecturers</string>
-    <string name="course">Курс %1$s</string>
+    <string name="course">Course</string>
     <string name="my_schedule">My schedule</string>
     <string name="schedule">Schedule</string>
     <string name="lecture">Lecture</string>
@@ -59,4 +59,6 @@
     <string name="saturday">Saturday</string>
     <string name="na">n/a</string>
     <string name="practice">Practice</string>
+    <string name="schedule_stub">No pinned schedule</string>
+    <string name="no_such_group">No such group</string>
 </resources>

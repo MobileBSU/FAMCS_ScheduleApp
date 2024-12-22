@@ -72,6 +72,7 @@ fun getSharedModules() = listOf(
     authModule,
     utilityModule,
     searchModule,
+    searchGroup,
     searchTeacher,
     subject
 )

@@ -1,8 +1,11 @@
 package org.mobile.scheduleapp.presentation.screens.profileScreen
 
-import android.util.Log
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +23,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,7 +36,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
+import org.jetbrains.compose.resources.imageResource
+import org.koin.androidx.compose.koinViewModel
 import org.mobile.scheduleapp.R
+import org.mobile.scheduleapp.presentation.view.navigation.AppRoute
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.presentation.view.theming.Dimens.SmallIconSize
 import org.mobile.scheduleapp.presentation.view.theming.ScheduleAppTheme
@@ -43,8 +50,15 @@ fun ProfileScreen(
     modifier: Modifier = Modifier,
     navController: NavController
 ) {
+
+    val viewModel: ProfileViewModel = koinViewModel()
+    val state = viewModel.stateFlow.collectAsState().value
+
     ProfileScreenLayout(
-        onEditClicked = {},
+        state = state,
+        onEditClicked = {
+            navController.navigate(AppRoute.EditScreen.route)
+        },
         onNotificationClicked = {},
         onLanguageClicked = {},
         onPrivacyClicked = {},
@@ -54,6 +68,7 @@ fun ProfileScreen(
 
 @Composable
 fun ProfileScreenLayout(
+    state: ProfileUiState,
     modifier: Modifier = Modifier,
     onEditClicked: () -> Unit,
     onNotificationClicked: () -> Unit,
@@ -73,10 +88,12 @@ fun ProfileScreenLayout(
 
         Spacer(modifier = modifier.height(Dimens.LargeSpaceBetween))
 
-        ProfileHeader(
-            profile = Profile("OG", id = "@lucaas", urlStr = ""),
-            onEditClicked = onEditClicked
-        )
+        state.profileUiItem?.let {
+            ProfileHeader(
+                profileUiItem = it,
+                onEditClicked = onEditClicked
+            )
+        }
         Spacer(modifier = Modifier.height(Dimens.MainVerticalPadding))
         ProfileOption(
             option = "Notifications",
@@ -97,28 +114,36 @@ fun ProfileScreenLayout(
 @Composable
 fun ProfileHeader(
     modifier: Modifier = Modifier,
-    profile: Profile,
-    onEditClicked: () -> Unit
+    profileUiItem: ProfileUiItem,
+    onEditClicked: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.fillMaxWidth()
     ) {
         Box {
-            Image(
-                painter = rememberAsyncImagePainter(
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data("https://bsu.by/upload/cacheResize/17d/558/e49acf52c0ce2df22be3b83d6c897ca9.jpg")
-                        .build()
-                ),
-                contentDescription = null,
-//                painter = painterResource(id = R.drawable.ic_profile_placeholder),
-//                contentDescription = "Profile Picture",
-//                contentScale = ContentScale.Crop,
-                modifier = modifier
-                    .size(Dimens.IconSize)
-                    .clip(RoundedCornerShape(Dimens.MediumCornerShape))
-            )
+            if (profileUiItem.urlStr.isNullOrEmpty()) {
+                Image(
+                    painter = painterResource(R.drawable.ic_launcher_foreground),
+                    contentDescription = null,
+                    modifier = modifier
+                        .size(Dimens.IconSize)
+                        .clip(RoundedCornerShape(Dimens.MediumCornerShape))
+                )
+            } else {
+                Image(
+                    painter = rememberAsyncImagePainter(
+                        model = ImageRequest.Builder(LocalContext.current)
+                            .data(profileUiItem.urlStr)
+                            .build()
+                    ),
+                    contentDescription = null,
+                    modifier = modifier
+                        .size(Dimens.IconSize)
+                        .clip(RoundedCornerShape(Dimens.MediumCornerShape))
+                        .border(width = 1.dp, color = MaterialTheme.colorScheme.primary)
+                )
+            }
             Icon(
                 painter = painterResource(id = R.drawable.ic_edit),
                 contentDescription = "Edit Icon",
@@ -132,7 +157,7 @@ fun ProfileHeader(
             )
         }
         Spacer(modifier = modifier.height(Dimens.MainHorizontalPadding))
-        Text(profile.name, style = MaterialTheme.typography.displayMedium)
+        Text(profileUiItem.name, style = MaterialTheme.typography.displayMedium)
     }
 }
 
@@ -161,18 +186,3 @@ fun ProfileOption(
     }
 }
 
-data class Profile(val name: String, val id: String, val urlStr: String)
-
-@Preview
-@Composable
-private fun Prev() {
-    ScheduleAppTheme {
-        ProfileScreenLayout(
-            onEditClicked = {},
-            onNotificationClicked = {},
-            onPrivacyClicked = {},
-            onStorageClicked = {},
-            onLanguageClicked = {}
-        )
-    }
-}
