@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
@@ -73,6 +74,9 @@ fun EditProfileScreen(
         controller = viewModel,
         onBackIconClicked = {
             navController.popBackStack()
+        },
+        onButtonClicked = {
+            navController.popBackStack()
         }
     )
 }
@@ -82,9 +86,9 @@ fun EditProfileScreenLayout(
     modifier: Modifier = Modifier,
     state: ProfileUiState,
     controller: ProfileController,
-    onBackIconClicked: () -> Unit
+    onBackIconClicked: () -> Unit,
+    onButtonClicked: () -> Unit
 ) {
-
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             controller.onSetNewPhotoClicked(uri.toString())
@@ -114,20 +118,26 @@ fun EditProfileScreenLayout(
 
         Spacer(modifier = modifier.height(Dimens.MainHorizontalPadding))
 
-        state.profileUiItem.let{
-            if (it != null) {
-                EditData(
-                    profile = it,
-                    onNameChanged = {},
-                    onSurnameChanged = {},
-                    onCourseChanged = {},
-                    onGroupChanged = {}
-                )
-            }
+        state.profileUiItem?.let { profile ->
+            EditData(
+                profile = profile,
+                onNameChanged = controller::updateName,
+                onEmailChanged = controller::updateEmail,
+                onCourseChanged = controller::updateCourse,
+                onGroupChanged = controller::updateGroup,
+                onButtonClicked = {
+                    onButtonClicked()
+                    controller.onButtonClicked(
+                        profile.id,
+                        profile.name,
+                        profile.email,
+                        profile.course,
+                        profile.group
+                    )
+                }
+            )
         }
-
     }
-
 }
 
 @Composable
@@ -169,10 +179,14 @@ fun EditData(
     modifier: Modifier = Modifier,
     profile: ProfileUiItem,
     onNameChanged: (String) -> Unit,
-    onSurnameChanged: (String) -> Unit,
+    onEmailChanged: (String) -> Unit,
     onCourseChanged: (String) -> Unit,
-    onGroupChanged: (String) -> Unit
+    onGroupChanged: (String) -> Unit,
+    onButtonClicked: () -> Unit
 ) {
+    var courseError by remember { mutableStateOf(false) }
+    var groupError by remember { mutableStateOf(false) }
+
     Column(
         modifier = modifier.fillMaxHeight(),
     ) {
@@ -182,57 +196,64 @@ fun EditData(
             id = R.string.name
         )
 
-
-        Spacer(modifier= modifier.height(Dimens.SmallVerticalPadding))
+        Spacer(modifier = modifier.height(Dimens.SmallVerticalPadding))
 
         EditInputTextField(
             value = profile.email,
-            onValueChanged = onSurnameChanged,
+            onValueChanged = onEmailChanged,
             id = R.string.email_address
         )
 
-        Spacer(modifier= modifier.height(Dimens.SmallVerticalPadding))
-
-        Text(
-            text = stringResource(id = R.string.course),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSecondary
-        )
         Spacer(modifier = modifier.height(Dimens.SmallVerticalPadding))
 
         EditInputTextField(
-            value = "0",
-            onValueChanged = onCourseChanged ,
+            value = profile.course.toString(),
+            onValueChanged = {
+                courseError = it.toIntOrNull() == null
+                onCourseChanged(it)
+            },
             id = R.string.course
         )
+        if (courseError) {
+            Text(
+                text = stringResource(id = R.string.invalid_course),
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.labelSmall
+            )
+        }
 
-        Spacer(modifier = modifier.height(Dimens.SmallVerticalPadding))
-
-        Text(
-            text = stringResource(id = R.string.group),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSecondary
-        )
         Spacer(modifier = modifier.height(Dimens.SmallVerticalPadding))
 
         EditInputTextField(
-            value = "0",
-            onValueChanged = onGroupChanged,
+            value = profile.group.toString(),
+            onValueChanged = {
+                groupError = it.toIntOrNull() == null
+                onGroupChanged(it)
+            },
             id = R.string.group
         )
+        if (groupError) {
+            Text(
+                text = stringResource(id = R.string.invalid_group),
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.labelSmall
+            )
+        }
 
         Spacer(modifier = modifier.height(Dimens.MainVerticalPadding))
 
         CustomButton(
             modifier = modifier,
-            onButtonClicked = {},
+            onButtonClicked = {
+                if (!courseError && !groupError) {
+                    onButtonClicked()
+                }
+            },
             id = R.string.save
         )
     }
-
-
-
 }
+
 
 @Composable
 fun EditInputTextField(

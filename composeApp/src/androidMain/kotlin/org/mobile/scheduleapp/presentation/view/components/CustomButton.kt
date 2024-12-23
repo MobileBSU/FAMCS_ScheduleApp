@@ -8,6 +8,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
@@ -31,6 +32,8 @@ fun CustomButton(
     ) {
         Text(
             stringResource(id = id),
+            modifier = modifier
+                .align(Alignment.CenterVertically),
             style = MaterialTheme.typography.bodyMedium,
         )
     }

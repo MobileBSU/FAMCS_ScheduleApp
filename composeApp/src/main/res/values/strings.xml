@@ -61,4 +61,6 @@
     <string name="practice">Practice</string>
     <string name="schedule_stub">No pinned schedule</string>
     <string name="no_such_group">No such group</string>
+    <string name="invalid_course">Invalid Course</string>
+    <string name="invalid_group">Invalid group</string>
 </resources>

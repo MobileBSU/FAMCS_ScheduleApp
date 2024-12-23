@@ -13,6 +13,7 @@ import org.mobile.scheduleapp.presentation.screens.searchScreens.groupSearchScre
 import org.mobile.scheduleapp.presentation.screens.searchScreens.lecturersSearchScreen.Lecturer
 import org.mobile.scheduleapp.searchGroup.domain.model.GroupSearchResultData
 import org.mobile.scheduleapp.searchTeacher.domain.model.TeacherSearchResultData
+import org.mobile.scheduleapp.student.domain.StudentResultData
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -75,6 +76,14 @@ fun List<SubjectResultData>.toScheduleUiState(id: Long): List<ScheduleUiState> {
             list = listOf(subjectsUi)
         )
     }
+}
+
+fun List<GroupSearchResultData>.toId(): Long {
+    return this.first().id
+}
+
+fun StudentResultData.toID(): Long? {
+    return this.groupId
 }
 
 fun List<SubjectResultData>.toSubject(): DetailedClassUiState {

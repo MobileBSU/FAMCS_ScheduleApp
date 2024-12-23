@@ -10,7 +10,9 @@ data class UserSettings(
     val name: String = "",
     val imageUrl: String? = null,
     val token: String = "",
-    val email: String = ""
+    val email: String = "",
+    val course: Int = 0,
+    val group: Int = 0
 )
 
 fun UserSettings.toAuthResultData(): AuthResultData{
@@ -22,5 +24,12 @@ fun AuthResultData.toUserSettings(): UserSettings{
 }
 
 fun UserSettings.toProfileUiItem(): ProfileUiItem {
-    return ProfileUiItem(id = id, name = name, urlStr = imageUrl, email = email)
+    return ProfileUiItem(
+        id = id,
+        name = name,
+        urlStr = imageUrl,
+        email = email,
+        course = course,
+        group = group
+    )
 }

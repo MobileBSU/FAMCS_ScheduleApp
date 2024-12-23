@@ -23,9 +23,9 @@ val appModule = module{
     viewModel { MainActivityViewModel(get()) }
     viewModel { GroupSearchViewModel(get(), get()) }
     viewModel { LecturerSearchViewModel(get(), get())}
-    viewModel { DetailedLectureViewModel(get(), get(), get(), get()) }
+    viewModel { DetailedLectureViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { DetailedClassViewModel(get(), get(), get()) }
-    viewModel { ProfileViewModel(get()) }
+    viewModel { ProfileViewModel(get(), get(), get()) }
 
 
     single {

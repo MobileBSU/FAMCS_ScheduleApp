@@ -4,34 +4,77 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
+import androidx.datastore.core.DataStore
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.mobile.scheduleapp.common.datastore.UserSettings
 import org.mobile.scheduleapp.common.util.Result
+import org.mobile.scheduleapp.common.util.toID
 import org.mobile.scheduleapp.common.util.toScheduleUiState
 import org.mobile.scheduleapp.common.util.toUiState
 import org.mobile.scheduleapp.presentation.utils.StatefulViewModel
 import org.mobile.scheduleapp.searchGroup.domain.usecase.GetGroupByIdUseCase
 import org.mobile.scheduleapp.searchTeacher.domain.usecase.GetTeacherByIdUseCase
+import org.mobile.scheduleapp.student.data.StudentService
+import org.mobile.scheduleapp.student.domain.GetStudentUseCase
 import org.mobile.scheduleapp.subject.domain.usecase.GetSubjectsByGroupUseCase
 import org.mobile.scheduleapp.subject.domain.usecase.GetSubjectsByTeacherUseCase
 
 class DetailedLectureViewModel(
+    private val getStudentUseCase: GetStudentUseCase,
+    private val dataStore: DataStore<UserSettings>,
     private val subjectsByTeacherUseCase: GetSubjectsByTeacherUseCase,
     private val subjectsByGroupUseCase: GetSubjectsByGroupUseCase,
     private val getTeacherByIdUseCase: GetTeacherByIdUseCase,
     private val groupByIdUseCase: GetGroupByIdUseCase
 ): StatefulViewModel<ScheduleUiState>(ScheduleUiState()), ScheduleController {
 
+    init {
+        getUser()
+        getGroup()
+    }
     val uiState: StateFlow<ScheduleUiState>
         get() = stateFlow.stateIn(
             scope = viewModelScope,
             started = SharingStarted.Eagerly,
             initialValue = state
         )
+
+    override fun getUser() {
+        viewModelScope.launch {
+            dataStore.data.collect { profile ->
+                updateState {
+                    copy(userId = profile.id)
+                }
+            }
+        }
+    }
+
+    private fun getGroup() {
+        viewModelScope.launch {
+
+            val result = getStudentUseCase(state.userId)
+
+            when(result) {
+                is Result.Error -> {
+
+                    updateState {
+                        copy(errorMessage = result.message)
+                    }
+                }
+                is Result.Success -> {
+
+                    updateState {
+                        copy(groupId = result.data?.toID()!!)
+                    }
+                }
+            }
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun getTeacherSubject(id: Long) {
@@ -132,6 +175,7 @@ interface ScheduleController {
     fun getTeacherById(id: Long)
     fun getGroupSubject(id: Long)
     fun getGroupById(id: Long)
+    fun getUser()
 }
 
 data class ScheduleUiState(
@@ -139,7 +183,9 @@ data class ScheduleUiState(
     val list: List<SubjectsUi>? = null,
     val errorMessage: String? = null,
     val groupName: String? = null,
-    val teacherName: String? = null
+    val teacherName: String? = null,
+    val userId: Long = 0,
+    val groupId: Long? = 0
 )
 
 data class SubjectsUi(

@@ -12,7 +12,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -36,19 +41,34 @@ fun MyScheduleScreen(
 ) {
     val viewModel: DetailedLectureViewModel = koinViewModel()
 
-    var isStub: Boolean = true
+    viewModel.getUser()
+    val userId = viewModel.stateFlow.collectAsState().value.groupId
 
-    groupId?.let {
-        viewModel.getGroupSubject(it)
-        viewModel.getGroupById(it)
-        isStub = false
-    }
+    var isStub by remember { mutableStateOf(true) }
+    var isBackIconHidden by remember { mutableStateOf(false) }
 
-    teacherId?.let{
-        Log.d("TEST123", " HERE IS TEACHER   $teacherId")
-        viewModel.getTeacherSubject(it)
-        viewModel.getTeacherById(it)
-        isStub = false
+    LaunchedEffect(groupId, teacherId, userId) {
+        when {
+            groupId != null -> {
+                viewModel.getGroupSubject(groupId)
+                viewModel.getGroupById(groupId)
+                isStub = false
+                isBackIconHidden = false
+            }
+            userId != null -> {
+                viewModel.getGroupSubject(userId)
+                viewModel.getGroupById(userId)
+                isStub = false
+                isBackIconHidden = true
+            }
+            teacherId != null -> {
+                Log.d("TEST123", "HERE IS TEACHER $teacherId")
+                viewModel.getTeacherSubject(teacherId)
+                viewModel.getTeacherById(teacherId)
+                isStub = false
+                isBackIconHidden = false
+            }
+        }
     }
 
     val state = viewModel.uiState.collectAsState().value
@@ -59,9 +79,9 @@ fun MyScheduleScreen(
         },
         onCardClicked = {},
         state = state,
-        isStubActive = isStub
+        isStubActive = isStub,
+        isBackIconHidden = isBackIconHidden
     )
-
 }
 @Composable
 fun MyScheduleScreenLayout(
@@ -69,7 +89,8 @@ fun MyScheduleScreenLayout(
     state: ScheduleUiState,
     onBackIconClicked: () -> Unit,
     onCardClicked: () -> Unit,
-    isStubActive: Boolean = false
+    isStubActive: Boolean = false,
+    isBackIconHidden: Boolean = false
 ) {
     if (!isStubActive) {
         LazyColumn(
@@ -82,7 +103,7 @@ fun MyScheduleScreenLayout(
                     TopBar(
                         title = it,
                         onBackIconClicked = onBackIconClicked,
-                        isBackIconHidden = false
+                        isBackIconHidden = isBackIconHidden
                     )
                 }
 
@@ -90,7 +111,7 @@ fun MyScheduleScreenLayout(
                     TopBar(
                         title = it,
                         onBackIconClicked = onBackIconClicked,
-                        isBackIconHidden = false
+                        isBackIconHidden = isBackIconHidden
                     )
                 }
             }
