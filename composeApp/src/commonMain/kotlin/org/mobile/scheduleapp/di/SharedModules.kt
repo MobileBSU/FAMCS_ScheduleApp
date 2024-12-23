@@ -11,6 +11,7 @@ import org.mobile.scheduleapp.searchGroup.data.SearchGroupRepositoryImpl
 import org.mobile.scheduleapp.searchGroup.data.SearchGroupService
 import org.mobile.scheduleapp.searchGroup.domain.repository.SearchGroupRepository
 import org.mobile.scheduleapp.searchGroup.domain.usecase.GetAllGroupsUseCase
+import org.mobile.scheduleapp.searchGroup.domain.usecase.GetGroupByCourseUseCase
 import org.mobile.scheduleapp.searchGroup.domain.usecase.GetGroupByIdUseCase
 import org.mobile.scheduleapp.searchGroup.domain.usecase.GetGroupsByNameUseCase
 import org.mobile.scheduleapp.searchTeacher.data.SearchTeacherRepositoryImpl
@@ -19,6 +20,11 @@ import org.mobile.scheduleapp.searchTeacher.domain.repository.SearchTeacherRepos
 import org.mobile.scheduleapp.searchTeacher.domain.usecase.GetAllTeachersUseCase
 import org.mobile.scheduleapp.searchTeacher.domain.usecase.GetTeacherByIdUseCase
 import org.mobile.scheduleapp.searchTeacher.domain.usecase.GetTeachersByNameUseCase
+import org.mobile.scheduleapp.student.data.StudentRepositoryImpl
+import org.mobile.scheduleapp.student.data.StudentService
+import org.mobile.scheduleapp.student.domain.GetStudentUseCase
+import org.mobile.scheduleapp.student.domain.StudentRepository
+import org.mobile.scheduleapp.student.domain.UpdateStudentUseCase
 import org.mobile.scheduleapp.subject.data.SubjectRepositoryImpl
 import org.mobile.scheduleapp.subject.data.SubjectService
 import org.mobile.scheduleapp.subject.domain.repository.SubjectRepository
@@ -54,6 +60,7 @@ private val searchGroup = module {
     factory { GetGroupsByNameUseCase() }
     factory { GetAllGroupsUseCase() }
     factory { GetGroupByIdUseCase() }
+    factory { GetGroupByCourseUseCase() }
 }
 
 private val subject = module {
@@ -64,6 +71,13 @@ private val subject = module {
     factory { GetSubjectByIdUseCase() }
 }
 
+private val student = module {
+    single<StudentRepository> { StudentRepositoryImpl(get(), get()) }
+    factory { StudentService() }
+    factory { UpdateStudentUseCase() }
+    factory { GetStudentUseCase() }
+}
+
 private val utilityModule = module {
     factory { provideDispatcher() }
 }
@@ -72,6 +86,8 @@ fun getSharedModules() = listOf(
     authModule,
     utilityModule,
     searchModule,
+    searchGroup,
     searchTeacher,
-    subject
+    subject,
+    student
 )

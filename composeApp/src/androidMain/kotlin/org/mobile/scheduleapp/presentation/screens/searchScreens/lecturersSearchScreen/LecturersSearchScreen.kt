@@ -1,5 +1,6 @@
 package org.mobile.scheduleapp.presentation.screens.searchScreens.lecturersSearchScreen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,10 +30,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil3.compose.rememberAsyncImagePainter
 import org.koin.androidx.compose.koinViewModel
 import org.mobile.scheduleapp.R
 import org.mobile.scheduleapp.presentation.screens.searchScreens.Header
+import org.mobile.scheduleapp.presentation.view.navigation.AppRoute
 import org.mobile.scheduleapp.presentation.view.theming.Dimens
 import org.mobile.scheduleapp.screens.searchScreens.CustomSearchBar
 import org.mobile.scheduleapp.screens.searchScreens.Divider
@@ -42,30 +45,10 @@ import org.mobile.scheduleapp.presentation.view.theming.NeutralLightMedium
 import org.mobile.scheduleapp.presentation.view.theming.NeutralLightWhite
 
 
-//test version
-//data class Lecturer(
-//    val fio: String,
-//    val faculty: String,
-//    val department: String,
-//    val imageUrl: String
-//){
-//    fun doesMatchSearchQuery(query: String): Boolean {
-//        val matchingCombinations = listOf(
-//            faculty, fio, department
-//        )
-//        return matchingCombinations.any { it.contains(query, ignoreCase = true) }
-//    }
-//}
-//
-////test version
-//private val allLecturers = listOf(
-//    Lecturer("Казанцева Ольга Геннадьевна","ФПМИ", "МСС", ""),
-//    Lecturer("Казанцева Ольга Геннадьевна","ФПМИ", "МСС", "")
-//)
-
 @Composable
 fun LecturersSearchScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ) {
     val viewModel: LecturerSearchViewModel = koinViewModel()
     val state = viewModel.uiState.collectAsState().value
@@ -74,7 +57,12 @@ fun LecturersSearchScreen(
         modifier = modifier,
         state = state,
         controller = viewModel,
-        onLecturerClicked = {})
+        onLecturerClicked = {
+            val route = AppRoute.DetailedTeacher.route.replace("{teacher}", it.toString())
+            navController.navigate(route) {
+                launchSingleTop = true
+            }
+        })
 }
 
 @Composable
@@ -181,5 +169,4 @@ fun LecturerItem(
 @Preview
 @Composable
 fun Test2(){
-    LecturersSearchScreen()
 }

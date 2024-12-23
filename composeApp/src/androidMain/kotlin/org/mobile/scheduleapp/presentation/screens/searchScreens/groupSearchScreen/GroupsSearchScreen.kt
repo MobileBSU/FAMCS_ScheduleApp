@@ -64,6 +64,7 @@ fun  GroupSearchScreen(
         controller = viewModel,
         onGroupClicked = {
             navController.navigate(AppRoute.DetailedGroup.route.replace("{group}", it.toString()))
+            {launchSingleTop = true}
         }
     )
 
@@ -105,7 +106,11 @@ fun GroupSearchLayout(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = "No such groups")
+                Text(
+                    text = stringResource(R.string.no_such_group),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
             }
         }
     }

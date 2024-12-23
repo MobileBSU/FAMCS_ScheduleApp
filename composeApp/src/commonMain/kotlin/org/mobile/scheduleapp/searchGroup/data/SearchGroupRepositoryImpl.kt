@@ -75,4 +75,29 @@ internal class SearchGroupRepositoryImpl(
             }
         }
     }
+
+    override suspend fun getGroupByCourse(
+        course: Int,
+        group: Int
+    ): Result<List<GroupSearchResultData>> {
+        return withContext(dispatcher.io){
+            try {
+                val groupSearchResponse = searchGroupService.getGroupByCourse(course, group)
+
+                if (groupSearchResponse.data == null) {
+                    Result.Error(
+                        message = groupSearchResponse.errorMessage
+                    )
+                } else {
+                    Result.Success(
+                        data = groupSearchResponse.data.map { it.toGroupSearchResultData() }
+                    )
+                }
+            }catch (e: Exception) {
+                Result.Error(
+                    message = "Oops, we couldn`t send your request + $e"
+                )
+            }
+        }
+    }
 }

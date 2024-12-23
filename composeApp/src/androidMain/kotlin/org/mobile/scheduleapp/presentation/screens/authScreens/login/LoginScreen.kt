@@ -233,6 +233,8 @@ fun CustomTextField(
     keyboardType: KeyboardType = KeyboardType.Text,
     isPasswordField: Boolean = false,
     isSingleLine: Boolean = false,
+    readOnly: Boolean = false,
+    keyboardOptions: KeyboardOptions= KeyboardOptions.Default,
     @StringRes hint: Int
 ) {
 
@@ -253,6 +255,7 @@ fun CustomTextField(
         onValueChange = {
             onValueChange(it)
         },
+        readOnly = readOnly,
         placeholder = {
              Text(
                  text = stringResource(id = hint),
@@ -269,6 +272,7 @@ fun CustomTextField(
             unfocusedIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
         ),
+
         visualTransformation = if(isPasswordField){
             if(isPasswrodVisible){
                 VisualTransformation.None
@@ -278,7 +282,7 @@ fun CustomTextField(
         }else {
             VisualTransformation.None
         },
-        trailingIcon = if (isPasswordField) {
+        trailingIcon = if (isPasswordField){
             {
                 PasswordEyeIcon(isPasswordHidden = isPasswrodVisible) {
                     isPasswrodVisible = !isPasswrodVisible
@@ -286,7 +290,7 @@ fun CustomTextField(
             }
         }else {
             null
-        }
+        },
     )
 
 }

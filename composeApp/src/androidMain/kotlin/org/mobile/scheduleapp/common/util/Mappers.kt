@@ -13,6 +13,7 @@ import org.mobile.scheduleapp.presentation.screens.searchScreens.groupSearchScre
 import org.mobile.scheduleapp.presentation.screens.searchScreens.lecturersSearchScreen.Lecturer
 import org.mobile.scheduleapp.searchGroup.domain.model.GroupSearchResultData
 import org.mobile.scheduleapp.searchTeacher.domain.model.TeacherSearchResultData
+import org.mobile.scheduleapp.student.domain.StudentResultData
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -38,7 +39,7 @@ fun TeacherSearchResultData.toUiState(): Lecturer {
 fun List<SubjectResultData>.toScheduleUiState(id: Long): List<ScheduleUiState> {
     val today = LocalDate.now()
     val weekFields = WeekFields.of(Locale.getDefault())
-    val currentDayOfWeek = today.get(weekFields.dayOfWeek()) // 1 - Понедельник, 7 - Воскресенье
+    val currentDayOfWeek = today.get(weekFields.dayOfWeek())
 
     return this.groupBy { it.dayOfWeek }.map { (dayOfWeek, subjects) ->
         val daysUntil = if (dayOfWeek >= currentDayOfWeek) {
@@ -59,24 +60,30 @@ fun List<SubjectResultData>.toScheduleUiState(id: Long): List<ScheduleUiState> {
                 classRoom = subject.classRoom,
                 groupId = subject.groupId,
                 teacherId = subject.teacherId,
-                lectureType = if(subject.isLecture) R.string.L else R.string.P,
+                lectureType = if (subject.isLecture) R.string.L else R.string.P
             )
         }
 
-        val uiSubjects = subjects.map {
-            SubjectsUi(
-                day = targetDate.dayOfWeek.name.lowercase()
-                    .replaceFirstChar { it.uppercase() },
-                date = targetDate.format(dateFormatter),
-                subjects = uiSubjectsItems
-            )
-        }
+        val subjectsUi = SubjectsUi(
+            day = targetDate.dayOfWeek.name.lowercase()
+                .replaceFirstChar { it.uppercase() },
+            date = targetDate.format(dateFormatter),
+            subjects = uiSubjectsItems
+        )
 
         ScheduleUiState(
             id = id,
-            list = uiSubjects
+            list = listOf(subjectsUi)
         )
     }
+}
+
+fun List<GroupSearchResultData>.toId(): Long {
+    return this.first().id
+}
+
+fun StudentResultData.toID(): Long? {
+    return this.groupId
 }
 
 fun List<SubjectResultData>.toSubject(): DetailedClassUiState {
