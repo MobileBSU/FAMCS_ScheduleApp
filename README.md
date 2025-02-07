@@ -1,62 +1,74 @@
-# Мобильное приложение для управления расписанием занятий
+# Mobile Application for Class Schedule Management
 
-## Цель проекта
-Разработка мобильного приложения для платформ Android и iOS, которое позволит студентам легко управлять своим расписанием занятий в университете. Приложение будет доступно для студентов Белорусского Государственного Университета и направлено на упрощение планирования учебного процесса.
+## Languages
+- [English](README.md)
+- [Русский](README_ru.md)
+- [German](README_de.md)
 
-## Границы проекта
+## Project Goal
+The development of a mobile application for Android and iOS platforms that will allow students to easily manage their university class schedules. The application will be available for students of Belarusian State University and is aimed at simplifying academic planning.
 
-### Область применения
-- Приложение предназначено исключительно для студентов Белорусского Государственного Университета.
-- Основной функционал – управление расписанием занятий.
-- Приложение **не будет включать** управление оценками или взаимодействие с преподавателями.
+## Project Scope
 
-## Актуальность проекта и решаемые проблемы
-Существующие системы управления расписанием в университете не обеспечивают должного уровня удобства и функциональности. Наше приложение призвано решить следующие проблемы:
-- Отсутствие удобного интерфейса для планирования учебного процесса.
-- Недостаточная интеграция с актуальными потребностями студентов.
-- Отсутствие аналогичных решений в Беларуси.
+### Application Area
+- The application is intended exclusively for students of Belarusian State University.
+- The main functionality is class schedule management.
+- The application **will not include** grade management or teacher interaction.
 
-**Решение**: Проект улучшит эффективность планирования времени для студентов и упростит взаимодействие с учебным процессом.
+## Relevance and Problem Solving
+Existing university scheduling systems do not provide a sufficient level of convenience and functionality. Our application aims to address the following problems:
+- Lack of a user-friendly interface for academic planning.
+- Insufficient integration with students' current needs.
+- Absence of similar solutions in Belarus.
 
-## Роль пользователя системы
+**Solution**: The project will improve time management efficiency for students and simplify interaction with the academic process.
 
-### Описание пользователей:
-1. **Студент, участник актива**
-   - Студент факультета, активно участвующий в организации факультетских мероприятий.
+## User Roles in the System
+
+### User Descriptions:
+1. **Student, Active Participant**
+   - A faculty student actively participating in organizing faculty events.
   
-2. **Администрация/Преподаватель**
-   - Член преподавательского состава или административный работник, занимающийся организацией учебного процесса и преподаванием.
+2. **Administration/Teacher**
+   - A faculty member or administrative staff responsible for organizing the academic process and teaching.
 
-## Инструменты и технологии для реализации проекта
+## Tools and Technologies for Project Implementation
 
-### Платформа Android:
-- **Языки программирования**: Kotlin, Java
-- **Фреймворки и библиотеки**:
+### Android Platform:
+- **Programming Languages**: Kotlin, Java
+- **Frameworks and Libraries**:
   - Android SDK
   - Jetpack Compose + Material Design
-  - Ktor (для сетевых запросов)
-  - Coroutines + Flow (для работы с асинхронными потоками данных)
-  - Koin (для внедрения зависимостей)
-  - Coil (для работы с изображениями)
-  - MVVM (архитектурные паттерны)
-  - JUnit + Mockito (тестирование)
- ### Платформа IOS
- - **Язык программирования**: Swift
- - **Фреймворки и библиотеки**:
- - SwiftUI essentials Views Navigation and modal presentation Passing data State management Persistence and concurrency UIKit essentials Collection views and navigation Adding, deleting, and filtering reminders Custom views and animation System frameworks
+  - Ktor (for network requests)
+  - Coroutines + Flow (for handling asynchronous data streams)
+  - Koin (for dependency injection)
+  - Coil (for image handling)
+  - MVVM (architectural patterns)
+  - JUnit + Mockito (testing)
 
-### Инструменты планирования:
-- **GitHub** для управления проектом и версионирования.
+### iOS Platform:
+- **Programming Language**: Swift
+- **Frameworks and Libraries**:
+  - SwiftUI essentials (Views, Navigation, and modal presentation)
+  - Passing data, State management
+  - Persistence and concurrency
+  - UIKit essentials (Collection views and navigation)
+  - Adding, deleting, and filtering reminders
+  - Custom views and animation
+  - System frameworks
 
-### Средства разработки:
-- **Xcode** (для iOS)
-- **Android Studio** (для Android)
+### Planning Tools:
+- **GitHub** for project management and version control.
 
-### Дизайн:
-- **Figma**: [Ссылка на макет приложения](https://www.figma.com/design/96rNac0zYX7WNxXM3Bc9FT/ScheduleApp?node-id=0-1&m=dev)
+### Development Tools:
+- **Xcode** (for iOS)
+- **Android Studio** (for Android)
 
-### Сервер: 
-- **Github**: [Ссылка на репозиторий серера](https://github.com/MobileBSU/FAMCS_Schedule_Server)
+### Design:
+- **Figma**: [Link to the app design](https://www.figma.com/design/96rNac0zYX7WNxXM3Bc9FT/ScheduleApp?node-id=0-1&m=dev)
 
-## Пример архитектуры базы данных
-![База данных](https://github.com/user-attachments/assets/4e5e3511-b717-4efd-8399-b76b5607b987)
+### Server: 
+- **GitHub**: [Server repository link](https://github.com/MobileBSU/FAMCS_Schedule_Server)
+
+## Example of Database Architecture
+![Database](https://github.com/user-attachments/assets/4e5e3511-b717-4efd-8399-b76b5607b987)
