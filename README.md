@@ -3,7 +3,6 @@
 ## Languages
 - [English](README.md)
 - [Русский](README_ru.md)
-- [German](README_de.md)
 
 ## Project Goal
 The development of a mobile application for Android and iOS platforms that will allow students to easily manage their university class schedules. The application will be available for students of Belarusian State University and is aimed at simplifying academic planning.
